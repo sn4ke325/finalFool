@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g 2015-12-11 13:15:43
+// $ANTLR 3.5.2 D:\\git\\finalFool\\FOOL.g 2016-09-16 16:31:55
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -53,15 +53,15 @@ public class FOOLLexer extends Lexer {
 	public FOOLLexer(CharStream input, RecognizerSharedState state) {
 		super(input,state);
 	}
-	@Override public String getGrammarFileName() { return "S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g"; }
+	@Override public String getGrammarFileName() { return "D:\\git\\finalFool\\FOOL.g"; }
 
 	// $ANTLR start "SEMIC"
 	public final void mSEMIC() throws RecognitionException {
 		try {
 			int _type = SEMIC;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:157:7: ( ';' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:157:9: ';'
+			// D:\\git\\finalFool\\FOOL.g:157:7: ( ';' )
+			// D:\\git\\finalFool\\FOOL.g:157:9: ';'
 			{
 			match(';'); 
 			}
@@ -80,8 +80,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = COLON;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:158:7: ( ':' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:158:9: ':'
+			// D:\\git\\finalFool\\FOOL.g:158:7: ( ':' )
+			// D:\\git\\finalFool\\FOOL.g:158:9: ':'
 			{
 			match(':'); 
 			}
@@ -100,8 +100,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = COMMA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:159:7: ( ',' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:159:9: ','
+			// D:\\git\\finalFool\\FOOL.g:159:7: ( ',' )
+			// D:\\git\\finalFool\\FOOL.g:159:9: ','
 			{
 			match(','); 
 			}
@@ -120,8 +120,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:160:4: ( '==' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:160:6: '=='
+			// D:\\git\\finalFool\\FOOL.g:160:4: ( '==' )
+			// D:\\git\\finalFool\\FOOL.g:160:6: '=='
 			{
 			match("=="); 
 
@@ -141,8 +141,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = ASS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:161:5: ( '=' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:161:7: '='
+			// D:\\git\\finalFool\\FOOL.g:161:5: ( '=' )
+			// D:\\git\\finalFool\\FOOL.g:161:7: '='
 			{
 			match('='); 
 			}
@@ -161,8 +161,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = PLUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:162:6: ( '+' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:162:8: '+'
+			// D:\\git\\finalFool\\FOOL.g:162:6: ( '+' )
+			// D:\\git\\finalFool\\FOOL.g:162:8: '+'
 			{
 			match('+'); 
 			}
@@ -181,8 +181,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = TIMES;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:163:7: ( '*' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:163:9: '*'
+			// D:\\git\\finalFool\\FOOL.g:163:7: ( '*' )
+			// D:\\git\\finalFool\\FOOL.g:163:9: '*'
 			{
 			match('*'); 
 			}
@@ -201,7 +201,7 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = NAT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:164:5: ( ( ( '1' .. '9' ) ( '0' .. '9' )* ) | '0' )
+			// D:\\git\\finalFool\\FOOL.g:164:5: ( ( ( '1' .. '9' ) ( '0' .. '9' )* ) | '0' )
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( ((LA2_0 >= '1' && LA2_0 <= '9')) ) {
@@ -219,10 +219,10 @@ public class FOOLLexer extends Lexer {
 
 			switch (alt2) {
 				case 1 :
-					// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:164:7: ( ( '1' .. '9' ) ( '0' .. '9' )* )
+					// D:\\git\\finalFool\\FOOL.g:164:7: ( ( '1' .. '9' ) ( '0' .. '9' )* )
 					{
-					// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:164:7: ( ( '1' .. '9' ) ( '0' .. '9' )* )
-					// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:164:8: ( '1' .. '9' ) ( '0' .. '9' )*
+					// D:\\git\\finalFool\\FOOL.g:164:7: ( ( '1' .. '9' ) ( '0' .. '9' )* )
+					// D:\\git\\finalFool\\FOOL.g:164:8: ( '1' .. '9' ) ( '0' .. '9' )*
 					{
 					if ( (input.LA(1) >= '1' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -232,7 +232,7 @@ public class FOOLLexer extends Lexer {
 						recover(mse);
 						throw mse;
 					}
-					// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:164:18: ( '0' .. '9' )*
+					// D:\\git\\finalFool\\FOOL.g:164:18: ( '0' .. '9' )*
 					loop1:
 					while (true) {
 						int alt1=2;
@@ -243,7 +243,7 @@ public class FOOLLexer extends Lexer {
 
 						switch (alt1) {
 						case 1 :
-							// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:
+							// D:\\git\\finalFool\\FOOL.g:
 							{
 							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 								input.consume();
@@ -266,7 +266,7 @@ public class FOOLLexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:164:33: '0'
+					// D:\\git\\finalFool\\FOOL.g:164:33: '0'
 					{
 					match('0'); 
 					}
@@ -287,8 +287,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = TRUE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:165:6: ( 'true' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:165:8: 'true'
+			// D:\\git\\finalFool\\FOOL.g:165:6: ( 'true' )
+			// D:\\git\\finalFool\\FOOL.g:165:8: 'true'
 			{
 			match("true"); 
 
@@ -308,8 +308,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = FALSE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:166:7: ( 'false' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:166:9: 'false'
+			// D:\\git\\finalFool\\FOOL.g:166:7: ( 'false' )
+			// D:\\git\\finalFool\\FOOL.g:166:9: 'false'
 			{
 			match("false"); 
 
@@ -329,8 +329,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = LPAR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:167:7: ( '(' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:167:9: '('
+			// D:\\git\\finalFool\\FOOL.g:167:7: ( '(' )
+			// D:\\git\\finalFool\\FOOL.g:167:9: '('
 			{
 			match('('); 
 			}
@@ -349,8 +349,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = RPAR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:168:6: ( ')' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:168:8: ')'
+			// D:\\git\\finalFool\\FOOL.g:168:6: ( ')' )
+			// D:\\git\\finalFool\\FOOL.g:168:8: ')'
 			{
 			match(')'); 
 			}
@@ -369,8 +369,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = CLPAR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:169:8: ( '{' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:169:10: '{'
+			// D:\\git\\finalFool\\FOOL.g:169:8: ( '{' )
+			// D:\\git\\finalFool\\FOOL.g:169:10: '{'
 			{
 			match('{'); 
 			}
@@ -389,8 +389,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = CRPAR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:170:7: ( '}' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:170:9: '}'
+			// D:\\git\\finalFool\\FOOL.g:170:7: ( '}' )
+			// D:\\git\\finalFool\\FOOL.g:170:9: '}'
 			{
 			match('}'); 
 			}
@@ -409,8 +409,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = IF;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:171:5: ( 'if' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:171:7: 'if'
+			// D:\\git\\finalFool\\FOOL.g:171:5: ( 'if' )
+			// D:\\git\\finalFool\\FOOL.g:171:7: 'if'
 			{
 			match("if"); 
 
@@ -430,8 +430,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = THEN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:172:7: ( 'then' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:172:9: 'then'
+			// D:\\git\\finalFool\\FOOL.g:172:7: ( 'then' )
+			// D:\\git\\finalFool\\FOOL.g:172:9: 'then'
 			{
 			match("then"); 
 
@@ -451,8 +451,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = ELSE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:173:7: ( 'else' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:173:9: 'else'
+			// D:\\git\\finalFool\\FOOL.g:173:7: ( 'else' )
+			// D:\\git\\finalFool\\FOOL.g:173:9: 'else'
 			{
 			match("else"); 
 
@@ -472,8 +472,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = PRINT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:174:7: ( 'print' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:174:9: 'print'
+			// D:\\git\\finalFool\\FOOL.g:174:7: ( 'print' )
+			// D:\\git\\finalFool\\FOOL.g:174:9: 'print'
 			{
 			match("print"); 
 
@@ -493,8 +493,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = LET;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:175:5: ( 'let' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:175:7: 'let'
+			// D:\\git\\finalFool\\FOOL.g:175:5: ( 'let' )
+			// D:\\git\\finalFool\\FOOL.g:175:7: 'let'
 			{
 			match("let"); 
 
@@ -514,8 +514,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = IN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:176:4: ( 'in' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:176:6: 'in'
+			// D:\\git\\finalFool\\FOOL.g:176:4: ( 'in' )
+			// D:\\git\\finalFool\\FOOL.g:176:6: 'in'
 			{
 			match("in"); 
 
@@ -535,8 +535,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = VAR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:177:5: ( 'var' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:177:7: 'var'
+			// D:\\git\\finalFool\\FOOL.g:177:5: ( 'var' )
+			// D:\\git\\finalFool\\FOOL.g:177:7: 'var'
 			{
 			match("var"); 
 
@@ -556,8 +556,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = FUN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:178:5: ( 'fun' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:178:7: 'fun'
+			// D:\\git\\finalFool\\FOOL.g:178:5: ( 'fun' )
+			// D:\\git\\finalFool\\FOOL.g:178:7: 'fun'
 			{
 			match("fun"); 
 
@@ -577,8 +577,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = INT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:179:5: ( 'int' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:179:7: 'int'
+			// D:\\git\\finalFool\\FOOL.g:179:5: ( 'int' )
+			// D:\\git\\finalFool\\FOOL.g:179:7: 'int'
 			{
 			match("int"); 
 
@@ -598,8 +598,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = BOOL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:180:6: ( 'bool' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:180:8: 'bool'
+			// D:\\git\\finalFool\\FOOL.g:180:6: ( 'bool' )
+			// D:\\git\\finalFool\\FOOL.g:180:8: 'bool'
 			{
 			match("bool"); 
 
@@ -619,8 +619,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = ID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:182:5: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )* )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:182:7: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
+			// D:\\git\\finalFool\\FOOL.g:182:5: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )* )
+			// D:\\git\\finalFool\\FOOL.g:182:7: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -630,7 +630,7 @@ public class FOOLLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:183:5: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
+			// D:\\git\\finalFool\\FOOL.g:183:5: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
 			loop3:
 			while (true) {
 				int alt3=2;
@@ -641,7 +641,7 @@ public class FOOLLexer extends Lexer {
 
 				switch (alt3) {
 				case 1 :
-					// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:
+					// D:\\git\\finalFool\\FOOL.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 						input.consume();
@@ -675,10 +675,10 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = WHITESP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:185:10: ( ( '\\t' | ' ' | '\\r' | '\\n' )+ )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:185:12: ( '\\t' | ' ' | '\\r' | '\\n' )+
+			// D:\\git\\finalFool\\FOOL.g:185:10: ( ( '\\t' | ' ' | '\\r' | '\\n' )+ )
+			// D:\\git\\finalFool\\FOOL.g:185:12: ( '\\t' | ' ' | '\\r' | '\\n' )+
 			{
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:185:12: ( '\\t' | ' ' | '\\r' | '\\n' )+
+			// D:\\git\\finalFool\\FOOL.g:185:12: ( '\\t' | ' ' | '\\r' | '\\n' )+
 			int cnt4=0;
 			loop4:
 			while (true) {
@@ -690,7 +690,7 @@ public class FOOLLexer extends Lexer {
 
 				switch (alt4) {
 				case 1 :
-					// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:
+					// D:\\git\\finalFool\\FOOL.g:
 					{
 					if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
 						input.consume();
@@ -728,12 +728,12 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:187:9: ( '/*' ( . )* '*/' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:187:11: '/*' ( . )* '*/'
+			// D:\\git\\finalFool\\FOOL.g:187:9: ( '/*' ( . )* '*/' )
+			// D:\\git\\finalFool\\FOOL.g:187:11: '/*' ( . )* '*/'
 			{
 			match("/*"); 
 
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:187:16: ( . )*
+			// D:\\git\\finalFool\\FOOL.g:187:16: ( . )*
 			loop5:
 			while (true) {
 				int alt5=2;
@@ -754,7 +754,7 @@ public class FOOLLexer extends Lexer {
 
 				switch (alt5) {
 				case 1 :
-					// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:187:16: .
+					// D:\\git\\finalFool\\FOOL.g:187:16: .
 					{
 					matchAny(); 
 					}
@@ -784,8 +784,8 @@ public class FOOLLexer extends Lexer {
 		try {
 			int _type = ERR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:189:9: ( . )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:189:11: .
+			// D:\\git\\finalFool\\FOOL.g:189:9: ( . )
+			// D:\\git\\finalFool\\FOOL.g:189:11: .
 			{
 			matchAny(); 
 			 System.out.println("Invalid char: "+getText()); lexicalErrors++; _channel=HIDDEN; 
@@ -802,201 +802,201 @@ public class FOOLLexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:8: ( SEMIC | COLON | COMMA | EQ | ASS | PLUS | TIMES | NAT | TRUE | FALSE | LPAR | RPAR | CLPAR | CRPAR | IF | THEN | ELSE | PRINT | LET | IN | VAR | FUN | INT | BOOL | ID | WHITESP | COMMENT | ERR )
+		// D:\\git\\finalFool\\FOOL.g:1:8: ( SEMIC | COLON | COMMA | EQ | ASS | PLUS | TIMES | NAT | TRUE | FALSE | LPAR | RPAR | CLPAR | CRPAR | IF | THEN | ELSE | PRINT | LET | IN | VAR | FUN | INT | BOOL | ID | WHITESP | COMMENT | ERR )
 		int alt6=28;
 		alt6 = dfa6.predict(input);
 		switch (alt6) {
 			case 1 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:10: SEMIC
+				// D:\\git\\finalFool\\FOOL.g:1:10: SEMIC
 				{
 				mSEMIC(); 
 
 				}
 				break;
 			case 2 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:16: COLON
+				// D:\\git\\finalFool\\FOOL.g:1:16: COLON
 				{
 				mCOLON(); 
 
 				}
 				break;
 			case 3 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:22: COMMA
+				// D:\\git\\finalFool\\FOOL.g:1:22: COMMA
 				{
 				mCOMMA(); 
 
 				}
 				break;
 			case 4 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:28: EQ
+				// D:\\git\\finalFool\\FOOL.g:1:28: EQ
 				{
 				mEQ(); 
 
 				}
 				break;
 			case 5 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:31: ASS
+				// D:\\git\\finalFool\\FOOL.g:1:31: ASS
 				{
 				mASS(); 
 
 				}
 				break;
 			case 6 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:35: PLUS
+				// D:\\git\\finalFool\\FOOL.g:1:35: PLUS
 				{
 				mPLUS(); 
 
 				}
 				break;
 			case 7 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:40: TIMES
+				// D:\\git\\finalFool\\FOOL.g:1:40: TIMES
 				{
 				mTIMES(); 
 
 				}
 				break;
 			case 8 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:46: NAT
+				// D:\\git\\finalFool\\FOOL.g:1:46: NAT
 				{
 				mNAT(); 
 
 				}
 				break;
 			case 9 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:50: TRUE
+				// D:\\git\\finalFool\\FOOL.g:1:50: TRUE
 				{
 				mTRUE(); 
 
 				}
 				break;
 			case 10 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:55: FALSE
+				// D:\\git\\finalFool\\FOOL.g:1:55: FALSE
 				{
 				mFALSE(); 
 
 				}
 				break;
 			case 11 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:61: LPAR
+				// D:\\git\\finalFool\\FOOL.g:1:61: LPAR
 				{
 				mLPAR(); 
 
 				}
 				break;
 			case 12 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:66: RPAR
+				// D:\\git\\finalFool\\FOOL.g:1:66: RPAR
 				{
 				mRPAR(); 
 
 				}
 				break;
 			case 13 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:71: CLPAR
+				// D:\\git\\finalFool\\FOOL.g:1:71: CLPAR
 				{
 				mCLPAR(); 
 
 				}
 				break;
 			case 14 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:77: CRPAR
+				// D:\\git\\finalFool\\FOOL.g:1:77: CRPAR
 				{
 				mCRPAR(); 
 
 				}
 				break;
 			case 15 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:83: IF
+				// D:\\git\\finalFool\\FOOL.g:1:83: IF
 				{
 				mIF(); 
 
 				}
 				break;
 			case 16 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:86: THEN
+				// D:\\git\\finalFool\\FOOL.g:1:86: THEN
 				{
 				mTHEN(); 
 
 				}
 				break;
 			case 17 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:91: ELSE
+				// D:\\git\\finalFool\\FOOL.g:1:91: ELSE
 				{
 				mELSE(); 
 
 				}
 				break;
 			case 18 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:96: PRINT
+				// D:\\git\\finalFool\\FOOL.g:1:96: PRINT
 				{
 				mPRINT(); 
 
 				}
 				break;
 			case 19 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:102: LET
+				// D:\\git\\finalFool\\FOOL.g:1:102: LET
 				{
 				mLET(); 
 
 				}
 				break;
 			case 20 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:106: IN
+				// D:\\git\\finalFool\\FOOL.g:1:106: IN
 				{
 				mIN(); 
 
 				}
 				break;
 			case 21 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:109: VAR
+				// D:\\git\\finalFool\\FOOL.g:1:109: VAR
 				{
 				mVAR(); 
 
 				}
 				break;
 			case 22 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:113: FUN
+				// D:\\git\\finalFool\\FOOL.g:1:113: FUN
 				{
 				mFUN(); 
 
 				}
 				break;
 			case 23 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:117: INT
+				// D:\\git\\finalFool\\FOOL.g:1:117: INT
 				{
 				mINT(); 
 
 				}
 				break;
 			case 24 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:121: BOOL
+				// D:\\git\\finalFool\\FOOL.g:1:121: BOOL
 				{
 				mBOOL(); 
 
 				}
 				break;
 			case 25 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:126: ID
+				// D:\\git\\finalFool\\FOOL.g:1:126: ID
 				{
 				mID(); 
 
 				}
 				break;
 			case 26 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:129: WHITESP
+				// D:\\git\\finalFool\\FOOL.g:1:129: WHITESP
 				{
 				mWHITESP(); 
 
 				}
 				break;
 			case 27 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:137: COMMENT
+				// D:\\git\\finalFool\\FOOL.g:1:137: COMMENT
 				{
 				mCOMMENT(); 
 
 				}
 				break;
 			case 28 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\FOOL.g:1:145: ERR
+				// D:\\git\\finalFool\\FOOL.g:1:145: ERR
 				{
 				mERR(); 
 
