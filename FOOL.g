@@ -16,6 +16,9 @@ private int nestingLevel = -1;
 //il "fronte" della lista di tabelle � symTable.get(nestingLevel)
 }
 
+
+//ciao
+
 /*------------------------------------------------------------------
  * PARSER RULES
  *------------------------------------------------------------------*/
