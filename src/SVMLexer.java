@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g 2015-12-04 14:31:07
+// $ANTLR 3.5.2 D:\\git\\finalFool\\SVM.g 2016-09-16 16:31:56
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -50,15 +50,15 @@ public class SVMLexer extends Lexer {
 	public SVMLexer(CharStream input, RecognizerSharedState state) {
 		super(input,state);
 	}
-	@Override public String getGrammarFileName() { return "S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g"; }
+	@Override public String getGrammarFileName() { return "D:\\git\\finalFool\\SVM.g"; }
 
 	// $ANTLR start "PUSH"
 	public final void mPUSH() throws RecognitionException {
 		try {
 			int _type = PUSH;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:60:9: ( 'push' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:60:11: 'push'
+			// D:\\git\\finalFool\\SVM.g:60:9: ( 'push' )
+			// D:\\git\\finalFool\\SVM.g:60:11: 'push'
 			{
 			match("push"); 
 
@@ -78,8 +78,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = POP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:61:6: ( 'pop' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:61:8: 'pop'
+			// D:\\git\\finalFool\\SVM.g:61:6: ( 'pop' )
+			// D:\\git\\finalFool\\SVM.g:61:8: 'pop'
 			{
 			match("pop"); 
 
@@ -99,8 +99,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = ADD;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:62:6: ( 'add' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:62:8: 'add'
+			// D:\\git\\finalFool\\SVM.g:62:6: ( 'add' )
+			// D:\\git\\finalFool\\SVM.g:62:8: 'add'
 			{
 			match("add"); 
 
@@ -120,8 +120,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = SUB;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:63:6: ( 'sub' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:63:8: 'sub'
+			// D:\\git\\finalFool\\SVM.g:63:6: ( 'sub' )
+			// D:\\git\\finalFool\\SVM.g:63:8: 'sub'
 			{
 			match("sub"); 
 
@@ -141,8 +141,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = MULT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:64:7: ( 'mult' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:64:9: 'mult'
+			// D:\\git\\finalFool\\SVM.g:64:7: ( 'mult' )
+			// D:\\git\\finalFool\\SVM.g:64:9: 'mult'
 			{
 			match("mult"); 
 
@@ -162,8 +162,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = DIV;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:65:6: ( 'div' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:65:8: 'div'
+			// D:\\git\\finalFool\\SVM.g:65:6: ( 'div' )
+			// D:\\git\\finalFool\\SVM.g:65:8: 'div'
 			{
 			match("div"); 
 
@@ -183,8 +183,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = STOREW;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:66:9: ( 'sw' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:66:11: 'sw'
+			// D:\\git\\finalFool\\SVM.g:66:9: ( 'sw' )
+			// D:\\git\\finalFool\\SVM.g:66:11: 'sw'
 			{
 			match("sw"); 
 
@@ -204,8 +204,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = LOADW;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:67:8: ( 'lw' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:67:10: 'lw'
+			// D:\\git\\finalFool\\SVM.g:67:8: ( 'lw' )
+			// D:\\git\\finalFool\\SVM.g:67:10: 'lw'
 			{
 			match("lw"); 
 
@@ -225,8 +225,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = BRANCH;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:68:9: ( 'b' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:68:11: 'b'
+			// D:\\git\\finalFool\\SVM.g:68:9: ( 'b' )
+			// D:\\git\\finalFool\\SVM.g:68:11: 'b'
 			{
 			match('b'); 
 			}
@@ -245,8 +245,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = BRANCHEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:69:10: ( 'beq' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:69:12: 'beq'
+			// D:\\git\\finalFool\\SVM.g:69:10: ( 'beq' )
+			// D:\\git\\finalFool\\SVM.g:69:12: 'beq'
 			{
 			match("beq"); 
 
@@ -266,8 +266,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = BRANCHLESS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:70:11: ( 'bless' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:70:12: 'bless'
+			// D:\\git\\finalFool\\SVM.g:70:11: ( 'bless' )
+			// D:\\git\\finalFool\\SVM.g:70:12: 'bless'
 			{
 			match("bless"); 
 
@@ -287,8 +287,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = JS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:71:5: ( 'js' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:71:7: 'js'
+			// D:\\git\\finalFool\\SVM.g:71:5: ( 'js' )
+			// D:\\git\\finalFool\\SVM.g:71:7: 'js'
 			{
 			match("js"); 
 
@@ -308,8 +308,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = LOADRA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:72:9: ( 'lra' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:72:11: 'lra'
+			// D:\\git\\finalFool\\SVM.g:72:9: ( 'lra' )
+			// D:\\git\\finalFool\\SVM.g:72:11: 'lra'
 			{
 			match("lra"); 
 
@@ -329,8 +329,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = STORERA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:73:10: ( 'sra' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:73:12: 'sra'
+			// D:\\git\\finalFool\\SVM.g:73:10: ( 'sra' )
+			// D:\\git\\finalFool\\SVM.g:73:12: 'sra'
 			{
 			match("sra"); 
 
@@ -350,8 +350,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = LOADRV;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:74:9: ( 'lrv' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:74:11: 'lrv'
+			// D:\\git\\finalFool\\SVM.g:74:9: ( 'lrv' )
+			// D:\\git\\finalFool\\SVM.g:74:11: 'lrv'
 			{
 			match("lrv"); 
 
@@ -371,8 +371,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = STORERV;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:75:10: ( 'srv' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:75:12: 'srv'
+			// D:\\git\\finalFool\\SVM.g:75:10: ( 'srv' )
+			// D:\\git\\finalFool\\SVM.g:75:12: 'srv'
 			{
 			match("srv"); 
 
@@ -392,8 +392,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = LOADFP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:76:9: ( 'lfp' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:76:11: 'lfp'
+			// D:\\git\\finalFool\\SVM.g:76:9: ( 'lfp' )
+			// D:\\git\\finalFool\\SVM.g:76:11: 'lfp'
 			{
 			match("lfp"); 
 
@@ -413,8 +413,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = STOREFP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:77:10: ( 'sfp' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:77:12: 'sfp'
+			// D:\\git\\finalFool\\SVM.g:77:10: ( 'sfp' )
+			// D:\\git\\finalFool\\SVM.g:77:12: 'sfp'
 			{
 			match("sfp"); 
 
@@ -434,8 +434,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = COPYFP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:78:10: ( 'cfp' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:78:12: 'cfp'
+			// D:\\git\\finalFool\\SVM.g:78:10: ( 'cfp' )
+			// D:\\git\\finalFool\\SVM.g:78:12: 'cfp'
 			{
 			match("cfp"); 
 
@@ -455,8 +455,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = LOADHP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:79:9: ( 'lhp' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:79:11: 'lhp'
+			// D:\\git\\finalFool\\SVM.g:79:9: ( 'lhp' )
+			// D:\\git\\finalFool\\SVM.g:79:11: 'lhp'
 			{
 			match("lhp"); 
 
@@ -476,8 +476,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = STOREHP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:80:10: ( 'shp' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:80:12: 'shp'
+			// D:\\git\\finalFool\\SVM.g:80:10: ( 'shp' )
+			// D:\\git\\finalFool\\SVM.g:80:12: 'shp'
 			{
 			match("shp"); 
 
@@ -497,8 +497,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = PRINT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:81:8: ( 'print' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:81:10: 'print'
+			// D:\\git\\finalFool\\SVM.g:81:8: ( 'print' )
+			// D:\\git\\finalFool\\SVM.g:81:10: 'print'
 			{
 			match("print"); 
 
@@ -518,8 +518,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = HALT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:82:7: ( 'halt' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:82:9: 'halt'
+			// D:\\git\\finalFool\\SVM.g:82:7: ( 'halt' )
+			// D:\\git\\finalFool\\SVM.g:82:9: 'halt'
 			{
 			match("halt"); 
 
@@ -539,8 +539,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = COL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:84:6: ( ':' )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:84:8: ':'
+			// D:\\git\\finalFool\\SVM.g:84:6: ( ':' )
+			// D:\\git\\finalFool\\SVM.g:84:8: ':'
 			{
 			match(':'); 
 			}
@@ -559,8 +559,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = LABEL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:85:8: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )* )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:85:10: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
+			// D:\\git\\finalFool\\SVM.g:85:8: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )* )
+			// D:\\git\\finalFool\\SVM.g:85:10: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -570,7 +570,7 @@ public class SVMLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:85:29: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
+			// D:\\git\\finalFool\\SVM.g:85:29: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
 			loop1:
 			while (true) {
 				int alt1=2;
@@ -581,7 +581,7 @@ public class SVMLexer extends Lexer {
 
 				switch (alt1) {
 				case 1 :
-					// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:
+					// D:\\git\\finalFool\\SVM.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 						input.consume();
@@ -615,7 +615,7 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = NUMBER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:86:9: ( '0' | ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* ) )
+			// D:\\git\\finalFool\\SVM.g:86:9: ( '0' | ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* ) )
 			int alt4=2;
 			int LA4_0 = input.LA(1);
 			if ( (LA4_0=='0') ) {
@@ -633,15 +633,15 @@ public class SVMLexer extends Lexer {
 
 			switch (alt4) {
 				case 1 :
-					// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:86:11: '0'
+					// D:\\git\\finalFool\\SVM.g:86:11: '0'
 					{
 					match('0'); 
 					}
 					break;
 				case 2 :
-					// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:86:17: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* )
+					// D:\\git\\finalFool\\SVM.g:86:17: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* )
 					{
-					// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:86:17: ( '-' )?
+					// D:\\git\\finalFool\\SVM.g:86:17: ( '-' )?
 					int alt2=2;
 					int LA2_0 = input.LA(1);
 					if ( (LA2_0=='-') ) {
@@ -649,7 +649,7 @@ public class SVMLexer extends Lexer {
 					}
 					switch (alt2) {
 						case 1 :
-							// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:86:18: '-'
+							// D:\\git\\finalFool\\SVM.g:86:18: '-'
 							{
 							match('-'); 
 							}
@@ -657,8 +657,8 @@ public class SVMLexer extends Lexer {
 
 					}
 
-					// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:86:23: ( ( '1' .. '9' ) ( '0' .. '9' )* )
-					// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:86:24: ( '1' .. '9' ) ( '0' .. '9' )*
+					// D:\\git\\finalFool\\SVM.g:86:23: ( ( '1' .. '9' ) ( '0' .. '9' )* )
+					// D:\\git\\finalFool\\SVM.g:86:24: ( '1' .. '9' ) ( '0' .. '9' )*
 					{
 					if ( (input.LA(1) >= '1' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -668,7 +668,7 @@ public class SVMLexer extends Lexer {
 						recover(mse);
 						throw mse;
 					}
-					// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:86:34: ( '0' .. '9' )*
+					// D:\\git\\finalFool\\SVM.g:86:34: ( '0' .. '9' )*
 					loop3:
 					while (true) {
 						int alt3=2;
@@ -679,7 +679,7 @@ public class SVMLexer extends Lexer {
 
 						switch (alt3) {
 						case 1 :
-							// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:
+							// D:\\git\\finalFool\\SVM.g:
 							{
 							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 								input.consume();
@@ -717,10 +717,10 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = WHITESP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:88:10: ( ( '\\t' | ' ' | '\\r' | '\\n' )+ )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:88:12: ( '\\t' | ' ' | '\\r' | '\\n' )+
+			// D:\\git\\finalFool\\SVM.g:88:10: ( ( '\\t' | ' ' | '\\r' | '\\n' )+ )
+			// D:\\git\\finalFool\\SVM.g:88:12: ( '\\t' | ' ' | '\\r' | '\\n' )+
 			{
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:88:12: ( '\\t' | ' ' | '\\r' | '\\n' )+
+			// D:\\git\\finalFool\\SVM.g:88:12: ( '\\t' | ' ' | '\\r' | '\\n' )+
 			int cnt5=0;
 			loop5:
 			while (true) {
@@ -732,7 +732,7 @@ public class SVMLexer extends Lexer {
 
 				switch (alt5) {
 				case 1 :
-					// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:
+					// D:\\git\\finalFool\\SVM.g:
 					{
 					if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
 						input.consume();
@@ -770,8 +770,8 @@ public class SVMLexer extends Lexer {
 		try {
 			int _type = ERR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:90:9: ( . )
-			// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:90:11: .
+			// D:\\git\\finalFool\\SVM.g:90:9: ( . )
+			// D:\\git\\finalFool\\SVM.g:90:11: .
 			{
 			matchAny(); 
 			 System.err.println("Invalid char: "+getText()); _channel=HIDDEN; 
@@ -788,201 +788,201 @@ public class SVMLexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:8: ( PUSH | POP | ADD | SUB | MULT | DIV | STOREW | LOADW | BRANCH | BRANCHEQ | BRANCHLESS | JS | LOADRA | STORERA | LOADRV | STORERV | LOADFP | STOREFP | COPYFP | LOADHP | STOREHP | PRINT | HALT | COL | LABEL | NUMBER | WHITESP | ERR )
+		// D:\\git\\finalFool\\SVM.g:1:8: ( PUSH | POP | ADD | SUB | MULT | DIV | STOREW | LOADW | BRANCH | BRANCHEQ | BRANCHLESS | JS | LOADRA | STORERA | LOADRV | STORERV | LOADFP | STOREFP | COPYFP | LOADHP | STOREHP | PRINT | HALT | COL | LABEL | NUMBER | WHITESP | ERR )
 		int alt6=28;
 		alt6 = dfa6.predict(input);
 		switch (alt6) {
 			case 1 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:10: PUSH
+				// D:\\git\\finalFool\\SVM.g:1:10: PUSH
 				{
 				mPUSH(); 
 
 				}
 				break;
 			case 2 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:15: POP
+				// D:\\git\\finalFool\\SVM.g:1:15: POP
 				{
 				mPOP(); 
 
 				}
 				break;
 			case 3 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:19: ADD
+				// D:\\git\\finalFool\\SVM.g:1:19: ADD
 				{
 				mADD(); 
 
 				}
 				break;
 			case 4 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:23: SUB
+				// D:\\git\\finalFool\\SVM.g:1:23: SUB
 				{
 				mSUB(); 
 
 				}
 				break;
 			case 5 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:27: MULT
+				// D:\\git\\finalFool\\SVM.g:1:27: MULT
 				{
 				mMULT(); 
 
 				}
 				break;
 			case 6 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:32: DIV
+				// D:\\git\\finalFool\\SVM.g:1:32: DIV
 				{
 				mDIV(); 
 
 				}
 				break;
 			case 7 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:36: STOREW
+				// D:\\git\\finalFool\\SVM.g:1:36: STOREW
 				{
 				mSTOREW(); 
 
 				}
 				break;
 			case 8 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:43: LOADW
+				// D:\\git\\finalFool\\SVM.g:1:43: LOADW
 				{
 				mLOADW(); 
 
 				}
 				break;
 			case 9 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:49: BRANCH
+				// D:\\git\\finalFool\\SVM.g:1:49: BRANCH
 				{
 				mBRANCH(); 
 
 				}
 				break;
 			case 10 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:56: BRANCHEQ
+				// D:\\git\\finalFool\\SVM.g:1:56: BRANCHEQ
 				{
 				mBRANCHEQ(); 
 
 				}
 				break;
 			case 11 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:65: BRANCHLESS
+				// D:\\git\\finalFool\\SVM.g:1:65: BRANCHLESS
 				{
 				mBRANCHLESS(); 
 
 				}
 				break;
 			case 12 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:76: JS
+				// D:\\git\\finalFool\\SVM.g:1:76: JS
 				{
 				mJS(); 
 
 				}
 				break;
 			case 13 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:79: LOADRA
+				// D:\\git\\finalFool\\SVM.g:1:79: LOADRA
 				{
 				mLOADRA(); 
 
 				}
 				break;
 			case 14 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:86: STORERA
+				// D:\\git\\finalFool\\SVM.g:1:86: STORERA
 				{
 				mSTORERA(); 
 
 				}
 				break;
 			case 15 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:94: LOADRV
+				// D:\\git\\finalFool\\SVM.g:1:94: LOADRV
 				{
 				mLOADRV(); 
 
 				}
 				break;
 			case 16 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:101: STORERV
+				// D:\\git\\finalFool\\SVM.g:1:101: STORERV
 				{
 				mSTORERV(); 
 
 				}
 				break;
 			case 17 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:109: LOADFP
+				// D:\\git\\finalFool\\SVM.g:1:109: LOADFP
 				{
 				mLOADFP(); 
 
 				}
 				break;
 			case 18 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:116: STOREFP
+				// D:\\git\\finalFool\\SVM.g:1:116: STOREFP
 				{
 				mSTOREFP(); 
 
 				}
 				break;
 			case 19 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:124: COPYFP
+				// D:\\git\\finalFool\\SVM.g:1:124: COPYFP
 				{
 				mCOPYFP(); 
 
 				}
 				break;
 			case 20 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:131: LOADHP
+				// D:\\git\\finalFool\\SVM.g:1:131: LOADHP
 				{
 				mLOADHP(); 
 
 				}
 				break;
 			case 21 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:138: STOREHP
+				// D:\\git\\finalFool\\SVM.g:1:138: STOREHP
 				{
 				mSTOREHP(); 
 
 				}
 				break;
 			case 22 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:146: PRINT
+				// D:\\git\\finalFool\\SVM.g:1:146: PRINT
 				{
 				mPRINT(); 
 
 				}
 				break;
 			case 23 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:152: HALT
+				// D:\\git\\finalFool\\SVM.g:1:152: HALT
 				{
 				mHALT(); 
 
 				}
 				break;
 			case 24 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:157: COL
+				// D:\\git\\finalFool\\SVM.g:1:157: COL
 				{
 				mCOL(); 
 
 				}
 				break;
 			case 25 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:161: LABEL
+				// D:\\git\\finalFool\\SVM.g:1:161: LABEL
 				{
 				mLABEL(); 
 
 				}
 				break;
 			case 26 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:167: NUMBER
+				// D:\\git\\finalFool\\SVM.g:1:167: NUMBER
 				{
 				mNUMBER(); 
 
 				}
 				break;
 			case 27 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:174: WHITESP
+				// D:\\git\\finalFool\\SVM.g:1:174: WHITESP
 				{
 				mWHITESP(); 
 
 				}
 				break;
 			case 28 :
-				// S:\\LPeMC\\MaterialeDidattico\\Esercitazione_12_04\\FOOL\\SVM.g:1:182: ERR
+				// D:\\git\\finalFool\\SVM.g:1:182: ERR
 				{
 				mERR(); 
 
