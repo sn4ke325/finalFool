@@ -17,7 +17,7 @@ import java.util.HashMap;
  * PARSER RULES
  *------------------------------------------------------------------*/
 
-assembly: 
+assembly:  
     ( PUSH e=NUMBER   {code[i++] = PUSH; 
 			                 code[i++] = Integer.parseInt($e.text);}
 	  | PUSH e=LABEL    {code[i++] = PUSH; //

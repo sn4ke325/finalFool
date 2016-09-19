@@ -16,11 +16,12 @@ private int nestingLevel = -1;
 //il "fronte" della lista di tabelle � symTable.get(nestingLevel)
 }
 
+//creare class table in members
 /*------------------------------------------------------------------
  * PARSER RULES
  *------------------------------------------------------------------*/
   
-prog	returns [Node ast]
+prog	returns [Node ast] 
 	:       e=exp SEMIC	
             {$ast = new ProgNode($e.ast);}
         | LET 
@@ -30,7 +31,8 @@ prog	returns [Node ast]
             }
           d=dec IN e=exp SEMIC 
             {symTable.remove(nestingLevel--);
-             $ast = new LetInNode($d.astlist,$e.ast) ;} 
+             $ast = new LetInNode($d.astlist,$e.ast) ;}   
+        
 	;
 
 dec	returns [ArrayList<Node> astlist]
@@ -88,6 +90,14 @@ dec	returns [ArrayList<Node> astlist]
               symTable.remove(nestingLevel--);
               f.addBody($e.ast);
               }
+     /* | CLASS i=ID (EXTENDS e=ID)
+            LPAR
+            //parametri
+            (t=type i=ID)*
+            RPAR
+            CLPAR
+            //metodi
+            CRPAR  */ 
           ) SEMIC
         )+          
 	;
@@ -178,6 +188,8 @@ VAR	: 'var' ;
 FUN	: 'fun' ;
 INT	: 'int' ;
 BOOL	: 'bool' ;
+CLASS :'class' ;
+EXTENDS : 'extends'; 
 
 ID 	: ('a'..'z'|'A'..'Z')
  	  ('a'..'z'|'A'..'Z'|'0'..'9')* ;

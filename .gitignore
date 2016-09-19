@@ -1,9 +1,6 @@
 /FOOL.tokens
 /SVM.tokens
 /bin/
-/FOOL.tokens
-/SVM.tokens
-/bin/
 /src/FOOLLexer.java
 /src/FOOLParser.java
 /src/SVMLexer.java
