@@ -20,7 +20,7 @@ private int nestingLevel = -1;
  * PARSER RULES
  *------------------------------------------------------------------*/
   
-prog	returns [Node ast]
+prog	returns [Node ast] 
 	:       e=exp SEMIC	
             {$ast = new ProgNode($e.ast);}
         | LET 
