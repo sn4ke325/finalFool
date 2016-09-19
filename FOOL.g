@@ -33,7 +33,7 @@ prog	returns [Node ast]
             {symTable.remove(nestingLevel--);
              $ast = new LetInNode($d.astlist,$e.ast) ;}   
         
-	;
+	; 
 
 dec	returns [ArrayList<Node> astlist]
 	: {$astlist= new ArrayList<Node>() ;
@@ -90,29 +90,49 @@ dec	returns [ArrayList<Node> astlist]
               symTable.remove(nestingLevel--);
               f.addBody($e.ast);
               }
-     /* | CLASS i=ID (EXTENDS e=ID)
+      /*| CLASS i=ID (EXTENDS e=ID)?
             LPAR
             //parametri
-            (t=type i=ID)*
+            (pid=ID COLON pty=type)*
             RPAR
             CLPAR
             //metodi
-            CRPAR  */ 
+              FUN ID COLON type LPAR (ID COLON type (COMMA ID COLON type)*)? RPAR 
+            CRPAR */
           ) SEMIC
         )+          
 	;
 	
 type	returns [Node ast]
-  :       INT  {$ast=new IntTypeNode();}
-        | BOOL {$ast=new BoolTypeNode();} 
+  :   b=basic {$ast=$b.ast;}
 	;	
+	
+basic returns [Node ast]
+  : INT  {$ast=new IntTypeNode();}
+  | BOOL {$ast=new BoolTypeNode();} 
+  | i=ID   {
+            int j = nestingLevel;
+           STentry entry = null; 
+           while (j >= 0 && entry == null)
+             entry = (symTable.get(j--)).get($i.text);
+           if (entry == null)
+           {
+            System.out.println("Id " + $i.text + " at line " + $i.line + " not declared");
+            System.exit(0);
+           }               
+     $ast = new IdNode($i.text, entry, nestingLevel-j-1);
+     }
+  ;
 	 
 exp	returns [Node ast]
  	: f=term {$ast= $f.ast;}
  	    (PLUS l=term
  	      {$ast= new PlusNode ($ast,$l.ast);}
  	    )*
- 	;
+ 	| ID DOT ID LPAR RPAR
+ 	| NEW ID LPAR RPAR
+ 	| NULL
+	;
  	
 term	returns [Node ast]
 	: f=factor {$ast= $f.ast;}
@@ -188,8 +208,12 @@ VAR	: 'var' ;
 FUN	: 'fun' ;
 INT	: 'int' ;
 BOOL	: 'bool' ;
+//--------------------
 CLASS :'class' ;
 EXTENDS : 'extends'; 
+NEW : 'new';
+DOT : '.';
+NULL : 'null';
 
 ID 	: ('a'..'z'|'A'..'Z')
  	  ('a'..'z'|'A'..'Z'|'0'..'9')* ;
