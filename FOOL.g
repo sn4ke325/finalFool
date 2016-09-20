@@ -11,6 +11,8 @@ int lexicalErrors=0;
 
 @members{
 private ArrayList<HashMap<String,STentry>>  symTable = new ArrayList<HashMap<String,STentry>>();
+private ArrayList<HashMap<String,STentry>> virTable =  new ArrayList<HashMap<String,STentry>>();
+private ArrayList<HashMap<String,CTentry>> clTable =  new ArrayList<HashMap<String,CTentry>>();
 private int nestingLevel = -1;
 //livello ambiente con dichiarazioni piu' esterno � 0 (prima posizione ArrayList) invece che 1 (slides)
 //il "fronte" della lista di tabelle � symTable.get(nestingLevel)
@@ -105,7 +107,7 @@ declist	returns [ArrayList<Node> astlist]
 	
 type	returns [Node ast]
   :   b=basic {$ast=$b.ast;}
-      | arrow
+      | a=arrow {$ast=$a.ast;}
 	;	
 	
 basic returns [Node ast]
@@ -125,7 +127,8 @@ basic returns [Node ast]
      }
   ;
   
-arrow   : LPAR (type (COMMA type)* )? RPAR ARROW basic ;
+arrow returns [Node ast]
+  : LPAR (type (COMMA type)* )? RPAR ARROW basic ;
 	 
 expr	returns [Node ast]
  	: f=term {$ast= $f.ast;}
@@ -139,15 +142,15 @@ term	returns [Node ast]
 	: f=factor {$ast= $f.ast;}
 	    (    MULT l=factor {$ast= new MultNode ($ast,$l.ast);}
 	      |  DIV l=factor {$ast= new DivNode ($ast,$l.ast);}
-	      |  AND l=factor {$ast= new DivNode ($ast,$l.ast);}
+	      |  AND l=factor {$ast= new AndNode ($ast,$l.ast);}
 	    )*
 	;
 	
 factor	returns [Node ast]
 	: f=value {$ast= $f.ast;}
 	    (    EQ l=value {$ast= new EqualNode ($ast,$l.ast);}
-	      |  GR  value
-	      |  LE  value
+	      |  GR   l=value {$ast= new GRNode ($ast,$l.ast);}
+	      |  LE   l=value {$ast= new LENode ($ast,$l.ast);}
 	    )*
  	;	 	
  	
@@ -202,8 +205,10 @@ DOT : '.' ;
 OR  : '||';
 AND : '&&';
 NOT : 'not' ;
-GR  : '>=' ;
-LE  : '<=' ;
+GR : '>';
+LE : '<':
+GRE  : '>=' ;
+LEE  : '<=' ;
 EQ  : '==' ;  
 ASS : '=' ;
 TRUE  : 'true' ;
