@@ -1,4 +1,3 @@
-
 public class OrNode implements Node {
 
 	private Node left;
@@ -27,10 +26,7 @@ public class OrNode implements Node {
 		String labelTrue = FOOLlib.freshLabel();
 		String labelEnd = FOOLlib.freshLabel();
 
-		DebugGlobal.setdebugInfo("OrNode:");
-		DebugGlobal.increaseTab();
-
-		String myReturn = left.codeGeneration() + "push 1\n" + "beq " + labelTrue + "\n" +
+		return left.codeGeneration() + "push 1\n" + "beq " + labelTrue + "\n" +
 
 				right.codeGeneration() + "push 1\n" + "beq " + labelTrue + "\n" +
 
@@ -38,9 +34,6 @@ public class OrNode implements Node {
 
 				labelTrue + ":\n" + "push 1\n" + labelEnd + ":\n";
 
-		DebugGlobal.setdebugInfo(myReturn);
-		DebugGlobal.decreaseTab();
-		return myReturn;
 	}
 
 }

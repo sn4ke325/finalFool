@@ -131,15 +131,15 @@ expr	returns [Node ast]
  	: f=term {$ast= $f.ast;}
  	    (   PLUS l=term {$ast= new PlusNode ($ast,$l.ast);}
  	      | MINUS l=term {$ast= new MinusNode ($ast,$l.ast);}
- 	      | OR t2=term  {$ast= new OrNode ($ast,$l.ast);}
+ 	      | OR t2=term  {$ast= new OrNode ($ast,$t2.ast);}
  	    )*
 	;
  	
 term	returns [Node ast]
 	: f=factor {$ast= $f.ast;}
 	    (    MULT l=factor {$ast= new MultNode ($ast,$l.ast);}
-	      |  DIV factor l=factor {$ast= new DivNode ($ast,$l.ast);}
-	      |  AND factor
+	      |  DIV l=factor {$ast= new DivNode ($ast,$l.ast);}
+	      |  AND l=factor {$ast= new DivNode ($ast,$l.ast);}
 	    )*
 	;
 	
