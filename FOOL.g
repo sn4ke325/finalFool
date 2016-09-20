@@ -158,7 +158,7 @@ value	returns [Node ast]
 	: n=INTEGER {$ast= new NatNode(Integer.parseInt($n.text));}  
 	| TRUE {$ast= new BoolNode(true);}  
 	| FALSE {$ast= new BoolNode(false);}
-	| NULL 
+	| NULL {$ast = new NullNode()}
 	| NEW ID LPAR (expr (COMMA expr)* )? RPAR     
 	| LPAR e=expr RPAR {$ast= $e.ast;}  
 	| IF x=expr THEN CLPAR y=expr CRPAR
@@ -205,10 +205,8 @@ DOT : '.' ;
 OR  : '||';
 AND : '&&';
 NOT : 'not' ;
-GR : '>';
-LE : '<':
-GRE  : '>=' ;
-LEE  : '<=' ;
+GR : '>=';
+LE : '<=';
 EQ  : '==' ;  
 ASS : '=' ;
 TRUE  : 'true' ;
