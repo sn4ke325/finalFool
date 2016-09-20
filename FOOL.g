@@ -130,15 +130,15 @@ arrow   : LPAR (type (COMMA type)* )? RPAR ARROW basic ;
 expr	returns [Node ast]
  	: f=term {$ast= $f.ast;}
  	    (   PLUS l=term {$ast= new PlusNode ($ast,$l.ast);}
- 	      | MINUS term
- 	      | OR t2=term
+ 	      | MINUS l=term {$ast= new MinusNode ($ast,$l.ast);}
+ 	      | OR t2=term  {$ast= new OrNode ($ast,$l.ast);}
  	    )*
 	;
  	
 term	returns [Node ast]
 	: f=factor {$ast= $f.ast;}
 	    (    MULT l=factor {$ast= new MultNode ($ast,$l.ast);}
-	      |  DIV factor
+	      |  DIV factor l=factor {$ast= new DivNode ($ast,$l.ast);}
 	      |  AND factor
 	    )*
 	;
@@ -152,24 +152,17 @@ factor	returns [Node ast]
  	;	 	
  	
 value	returns [Node ast]
-	: n=INTEGER   
-	  {$ast= new NatNode(Integer.parseInt($n.text));}  
-	| TRUE 
-	  {$ast= new BoolNode(true);}  
-	| FALSE
-	  {$ast= new BoolNode(false);}
-	|  NULL 
+	: n=INTEGER {$ast= new NatNode(Integer.parseInt($n.text));}  
+	| TRUE {$ast= new BoolNode(true);}  
+	| FALSE {$ast= new BoolNode(false);}
+	| NULL 
 	| NEW ID LPAR (expr (COMMA expr)* )? RPAR     
-	| LPAR e=expr RPAR
-	  {$ast= $e.ast;}  
-	| IF x=expr THEN CLPAR y=expr CRPAR 
-		   ELSE CLPAR z=expr CRPAR 
-	  {$ast= new IfNode($x.ast,$y.ast,$z.ast);}	
+	| LPAR e=expr RPAR {$ast= $e.ast;}  
+	| IF x=expr THEN CLPAR y=expr CRPAR
+	    ELSE CLPAR z=expr CRPAR {$ast= new IfNode($x.ast,$y.ast,$z.ast);}	
 	| NOT LPAR expr RPAR  
-	| PRINT LPAR e=expr RPAR	
-	  {$ast= new PrintNode($e.ast);}
-	| i=ID 
-	  {//cercare la dichiarazione
+	| PRINT LPAR e=expr RPAR	{$ast= new PrintNode($e.ast);}
+	/*| i=ID {//cercare la dichiarazione
     int j=nestingLevel;
     STentry entry=null; 
     while (j>=0 && entry==null)
@@ -177,15 +170,16 @@ value	returns [Node ast]
     if (entry==null)
       {System.out.println("Id "+$i.text+" at line "+$i.line+" not declared");
        System.exit(0);}               
-	  $ast= new IdNode($i.text,entry,nestingLevel);}  
+	  $ast= new IdNode($i.text,entry,nestingLevel-j-1);}  
 	  ( LPAR {ArrayList<Node> argList = new ArrayList<Node>();} 
 	    (fa=expr {argList.add($fa.ast);}
 	      (COMMA a=expr {argList.add($a.ast);})* 
-	    )?	     
-	    RPAR {$ast=new CallNode($i.text,entry,argList,nestingLevel);}
-	  | DOT ID LPAR (expr (COMMA expr)* )? RPAR
-	  
-	  )?
+	    )? {$ast=new CallNode($i.text,entry,argList,nestingLevel-j-1);}	     
+	    RPAR 
+	   )?*/
+	 | ID ( LPAR (expr (COMMA expr)* )? RPAR 
+       | DOT ID LPAR (expr (COMMA expr)* )? RPAR  )
+	   
 
  	; 
 
