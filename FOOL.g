@@ -127,8 +127,12 @@ basic returns [Node ast]
      }
   ;
   
-arrow returns [Node ast]
-  : LPAR (type (COMMA type)* )? RPAR ARROW basic ;
+arrow returns [Node ast] //capire a cosa serve typeOffset simile a parOffset
+  : LPAR {ArrayList<Node> parTypes = new ArrayList<Node>();}
+      
+      (t1=type {parType.add($t1.ast);}
+       (COMMA t2=type{parType.add($t2.ast)} {})* )?
+        RPAR ARROW r=basic {return new ArrowTypeNode(parTypes, $r.ast)} ;
 	 
 expr	returns [Node ast]
  	: f=term {$ast= $f.ast;}
@@ -163,7 +167,7 @@ value	returns [Node ast]
 	| LPAR e=expr RPAR {$ast= $e.ast;}  
 	| IF x=expr THEN CLPAR y=expr CRPAR
 	    ELSE CLPAR z=expr CRPAR {$ast= new IfNode($x.ast,$y.ast,$z.ast);}	
-	| NOT LPAR expr RPAR  
+	| NOT LPAR e=expr RPAR  {$ast = new NotNode($e.ast);}
 	| PRINT LPAR e=expr RPAR	{$ast= new PrintNode($e.ast);}
 	/*| i=ID {//cercare la dichiarazione
     int j=nestingLevel;
