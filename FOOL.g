@@ -22,24 +22,33 @@ private int nestingLevel = -1;
  *------------------------------------------------------------------*/
   
 prog	returns [Node ast] 
-	:       e=exp SEMIC	
+	:       e=expr SEMIC	
             {$ast = new ProgNode($e.ast);}
         | LET 
             {nestingLevel++;
              HashMap<String,STentry> hm = new HashMap<String,STentry> ();
              symTable.add(hm);
             }
-          d=dec IN e=exp SEMIC 
+          d=declist IN e=expr SEMIC 
             {symTable.remove(nestingLevel--);
              $ast = new LetInNode($d.astlist,$e.ast) ;}   
         
 	; 
+	
+cllist returns [ArrayList<Node> astlist]
+ 	: (CLASS ID (EXTENDS ID)? LPAR (ID COLON basic (COMMA ID COLON basic)* )? RPAR    
+              CLPAR
+                 (FUN ID COLON basic LPAR (ID COLON type (COMMA ID COLON type)* )? RPAR
+              (LET (VAR ID COLON basic ASS expr SEMIC)* IN )? expr 
+            SEMIC)*                
+              CRPAR)*
+        ; 
 
-dec	returns [ArrayList<Node> astlist]
+declist	returns [ArrayList<Node> astlist]
 	: {$astlist= new ArrayList<Node>() ;
 	   int offset=-2;}
 	      ( (
-            VAR i=ID COLON t=type ASS e=exp
+            VAR i=ID COLON t=type ASS e=expr
               {VarNode v = new VarNode($i.text,$t.ast,$e.ast);
                $astlist.add(v);
                HashMap<String,STentry> hm = symTable.get(nestingLevel);
@@ -85,26 +94,18 @@ dec	returns [ArrayList<Node> astlist]
                   )*
                 )? 
               RPAR {entry.addType( new ArrowTypeNode(parTypes, $t.ast) );} 
-              (LET d=dec IN {f.addDec($d.astlist);})? e=exp 
+              (LET d=declist IN {f.addDec($d.astlist);})? e=expr 
               {//chiudere scope
               symTable.remove(nestingLevel--);
               f.addBody($e.ast);
               }
-      /*| CLASS i=ID (EXTENDS e=ID)?
-            LPAR
-            //parametri
-            (pid=ID COLON pty=type)*
-            RPAR
-            CLPAR
-            //metodi
-              FUN ID COLON type LPAR (ID COLON type (COMMA ID COLON type)*)? RPAR 
-            CRPAR */
           ) SEMIC
         )+          
 	;
 	
 type	returns [Node ast]
   :   b=basic {$ast=$b.ast;}
+      | arrow
 	;	
 	
 basic returns [Node ast]
@@ -123,44 +124,49 @@ basic returns [Node ast]
      $ast = new IdNode($i.text, entry, nestingLevel-j-1);
      }
   ;
+  
+arrow   : LPAR (type (COMMA type)* )? RPAR ARROW basic ;
 	 
-exp	returns [Node ast]
+expr	returns [Node ast]
  	: f=term {$ast= $f.ast;}
- 	    (PLUS l=term
- 	      {$ast= new PlusNode ($ast,$l.ast);}
+ 	    (   PLUS l=term {$ast= new PlusNode ($ast,$l.ast);}
+ 	      | MINUS term
+ 	      | OR t2=term
  	    )*
- 	| ID DOT ID LPAR RPAR
- 	| NEW ID LPAR RPAR
- 	| NULL
 	;
  	
 term	returns [Node ast]
 	: f=factor {$ast= $f.ast;}
-	    (TIMES l=factor
-	      {$ast= new MultNode ($ast,$l.ast);}
+	    (    MULT l=factor {$ast= new MultNode ($ast,$l.ast);}
+	      |  DIV factor
+	      |  AND factor
 	    )*
 	;
 	
 factor	returns [Node ast]
 	: f=value {$ast= $f.ast;}
-	    (EQ l=value
-	      {$ast= new EqualNode ($ast,$l.ast);}
+	    (    EQ l=value {$ast= new EqualNode ($ast,$l.ast);}
+	      |  GR  value
+	      |  LE  value
 	    )*
  	;	 	
  	
 value	returns [Node ast]
-	: n=NAT   
+	: n=INTEGER   
 	  {$ast= new NatNode(Integer.parseInt($n.text));}  
 	| TRUE 
 	  {$ast= new BoolNode(true);}  
 	| FALSE
-	  {$ast= new BoolNode(false);}  
-	| LPAR e=exp RPAR
+	  {$ast= new BoolNode(false);}
+	|  NULL 
+	| NEW ID LPAR (expr (COMMA expr)* )? RPAR     
+	| LPAR e=expr RPAR
 	  {$ast= $e.ast;}  
-	| IF x=exp THEN CLPAR y=exp CRPAR 
-		   ELSE CLPAR z=exp CRPAR 
-	  {$ast= new IfNode($x.ast,$y.ast,$z.ast);}	 
-	| PRINT LPAR e=exp RPAR	
+	| IF x=expr THEN CLPAR y=expr CRPAR 
+		   ELSE CLPAR z=expr CRPAR 
+	  {$ast= new IfNode($x.ast,$y.ast,$z.ast);}	
+	| NOT LPAR expr RPAR  
+	| PRINT LPAR e=expr RPAR	
 	  {$ast= new PrintNode($e.ast);}
 	| i=ID 
 	  {//cercare la dichiarazione
@@ -173,52 +179,59 @@ value	returns [Node ast]
        System.exit(0);}               
 	  $ast= new IdNode($i.text,entry,nestingLevel);}  
 	  ( LPAR {ArrayList<Node> argList = new ArrayList<Node>();} 
-	    (fa=exp {argList.add($fa.ast);}
-	      (COMMA a=exp {argList.add($a.ast);})* 
+	    (fa=expr {argList.add($fa.ast);}
+	      (COMMA a=expr {argList.add($a.ast);})* 
 	    )?	     
 	    RPAR {$ast=new CallNode($i.text,entry,argList,nestingLevel);}
-	  )? 	
+	  | DOT ID LPAR (expr (COMMA expr)* )? RPAR
+	  
+	  )?
+
  	; 
 
   	
 /*------------------------------------------------------------------
  * LEXER RULES
  *------------------------------------------------------------------*/
-SEMIC	: ';' ;
-COLON	: ':' ;
-COMMA	: ',' ;
-EQ	: '==' ;
-ASS	: '=' ;
-PLUS	: '+' ;
-TIMES	: '*' ;
-NAT	: (('1'..'9')('0'..'9')*) | '0';
-TRUE	: 'true' ;
-FALSE	: 'false' ;
-LPAR 	: '(' ;
-RPAR	: ')' ;
-CLPAR 	: '{' ;
-CRPAR	: '}' ;
-IF 	: 'if' ;
-THEN 	: 'then' ;
-ELSE 	: 'else' ;
-PRINT	: 'print' ; 
-LET	: 'let' ;
-IN	: 'in' ;
-VAR	: 'var' ;
-FUN	: 'fun' ;
-INT	: 'int' ;
-BOOL	: 'bool' ;
-//--------------------
-CLASS :'class' ;
-EXTENDS : 'extends'; 
-NEW : 'new';
-DOT : '.';
-NULL : 'null';
-
-ID 	: ('a'..'z'|'A'..'Z')
- 	  ('a'..'z'|'A'..'Z'|'0'..'9')* ;
-
-WHITESP  : ( '\t' | ' ' | '\r' | '\n' )+    { $channel=HIDDEN; } ;
+PLUS    : '+' ;
+MINUS   : '-' ;
+MULT    : '*' ;
+DIV   : '/' ;
+LPAR  : '(' ;
+RPAR  : ')' ;
+CLPAR : '{' ;
+CRPAR : '}' ;
+SEMIC   : ';' ;
+COLON   : ':' ; 
+COMMA : ',' ;
+DOT : '.' ;
+OR  : '||';
+AND : '&&';
+NOT : 'not' ;
+GR  : '>=' ;
+LE  : '<=' ;
+EQ  : '==' ;  
+ASS : '=' ;
+TRUE  : 'true' ;
+FALSE : 'false' ;
+IF  : 'if' ;
+THEN  : 'then';
+ELSE  : 'else' ;
+PRINT : 'print' ;
+LET     : 'let' ; 
+IN      : 'in' ;  
+VAR     : 'var' ;
+FUN : 'fun' ; 
+CLASS : 'class' ; 
+EXTENDS : 'extends' ; 
+NEW   : 'new' ; 
+NULL    : 'null' ;    
+INT : 'int' ;
+BOOL  : 'bool' ;
+ARROW   : '->' ;  
+INTEGER : (('1'..'9')('0'..'9')*) | '0' ; 
+ID    : ('a'..'z'|'A'..'Z')('a'..'z' | 'A'..'Z' | '0'..'9')* ;
+WHITESP : ( '\t' | ' ' | '\r' | '\n' )+    { $channel=HIDDEN; } ;
 
 COMMENT : '/*' .* '*/' { $channel=HIDDEN; } ;
  
