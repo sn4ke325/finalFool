@@ -10,13 +10,13 @@ int lexicalErrors = 0;
 }
 
 @members {
-private ArrayList<HashMap<String,STentry>>  symTable = new ArrayList<HashMap<String,STentry>>();
-private ArrayList<HashMap<String,STentry>> virTable =  new ArrayList<HashMap<String,STentry>>();
-private ArrayList<HashMap<String,CTentry>> clTable =  new ArrayList<HashMap<String,CTentry>>();
-private HashMap<String,String> superType = new HashMap<String,String>;//associo classi con loro estensione
+private ArrayList<HashMap<String, STentry>> symTable = new ArrayList<HashMap<String, STentry>>();
+private ArrayList<HashMap<String, STentry>> virTable = new ArrayList<HashMap<String, STentry>>();
+private HashMap<String, CTentry> clTable = new HashMap<String, CTentry>();
+private HashMap<String, String> superType = new HashMap<String, String>();//associo classi con loro estensione
 private int nestingLevel = -1;
+private int offset = -2;
 
-FOOLLib.putSuperType(superType);
 //livello ambiente con dichiarazioni piu' esterno � 0 (prima posizione ArrayList) invece che 1 (slides)
 //il "fronte" della lista di tabelle � symTable.get(nestingLevel)
 }
@@ -33,6 +33,7 @@ prog returns [Node ast]
                }
   | LET 
         {
+         FOOLlib.putSuperType(superType);
          nestingLevel++;
          HashMap<String, STentry> hm = new HashMap<String, STentry>();
          symTable.add(hm);
@@ -49,51 +50,115 @@ cllist returns [ArrayList < Node > astlist]
   
    {
     $astlist = new ArrayList<Node>();
-    int fieldOffset = -2; //va decrementato
-    int methodOffset = 0; //va incrementato
    }
   (
     CLASS cid=ID 
-                 {
+                 {// non usare la symbol table dentro la classe, uso solo virtual table. Riutilizzo Symbol dentro i metodi
+                  int classOffset = -2; //offset per la symbol table per la dichiarazione di var e fun dentro la classe
+                  int fieldOffset = -2; //va decrementato
+                  int methodOffset = 0; //va incrementato
+                  HashMap<String, STentry> hm = symTable.get(nestingLevel);
+                  STentry classEntry = new STentry(nestingLevel, null, offset--);//STentry per nome della classe
+                  if (hm.put($cid.text, classEntry) != null) {
+                  	System.out.println("Class" + $cid.text + " at line " + $cid.line + " already declared");
+                  	System.exit(0);
+                  }
+                  nestingLevel++;
+                  HashMap<String, STentry> hmn = new HashMap<String, STentry>();
+                  symTable.add(hmn);
+                  //creo entry per class table
+                  CTentry c = new CTentry();
+                  if (clTable.put($cid.text, c) != null) {
+                  	System.out.println("Class" + $cid.text + " at line " + $cid.line + " already declared");
+                  	System.exit(0);
+                  }
+                  //creo il class node per l'albero sintattico e lo aggiungo
                   ClassNode cn = new ClassNode($cid.text);
                   $astlist.add(cn);
                  }
     (EXTENDS eid=ID 
                     {
+                     //cerco se esiste la classe da cui estendo
+                     CTentry cle = clTable.get($eid.text);
+                     if (cle == null) {
+                     	System.out.println(
+                     			"Class " + $cid.text + " cannot extend class " + $eid.text + ". Class " + $eid.text + " does not exist");
+                     	System.exit(0);
+                     }
+                     //estendo la classe copiando le informazioni contenunte in super class
+                     c.extendsClass(cle);
+                     //aggiungo una entry nella superType che associa la classe con la superclasse
                      superType.put($cid.text, $eid.text);
                     })? LPAR (pid=ID COLON ptype=basic 
-                                                       {
-                                                        cn.addPar(new ParNode($pid.text, $ptype.ast));
+                                                       {//aggiungo il nodo del field alla lista dentro ClassNode
+                                                        cn.addField(new FieldNode($pid.text, $ptype.ast, fieldOffset));
+                                                        //aggiungo il field nella symbol table per lo scope interno alla classe (nesting level)
+                                                        if (hmn.put($pid.text, new STentry(nestingLevel, $ptype.ast, fieldOffset)) != null) {
+                                                        	System.out.println("Parameter id " + $pid.text + " at line " + $pid.line + " already declared");
+                                                        	System.exit(0);
+                                                        }
+                                                        fieldOffset--;
+                                                        //aggiungo il parametro (field) alla class table
+                                                        FieldNode par = new FieldNode();
                                                        }
       (COMMA pid2=ID COLON ptype2=basic 
                                         {
                                          cn.addPar(new ParNode($pid2.text, $ptype2.ast));
+                                         if (hmn.put($pid2.text, new STentry(nestingLevel, $ptype2.ast, parOffset++)) != null) {
+                                         	System.out.println("Parameter id " + $pid2.text + " at line " + $pid2.line + " already declared");
+                                         	System.exit(0);
+                                         }
                                         })*)? RPAR CLPAR
     (
       FUN fid=ID COLON fty=basic 
                                  {
-                                  FunNode m = new FunNode($fid.text.$fty.ast);
-                                  cn.addMethod(m);
+                                  int fparOffset = 1;
+                                  //aggiungo a symbol table //devo considerare overloading
+                                  /* if (hmn.put($fid.text, new STentry(nestingLevel, classOffset--, true)) != null) {
+                                           System.out.println("Method id " + $pid2.text + " at line " + $pid2.line + " already declared");
+                                           System.exit(0);
+                                          }*/
+                                  nestingLevel++;
+                                  HashMap<String, STentry> hmf = new HashMap<String, STentry>();
+                                  symTable.add(hmf);
+                                  
+                                  //aggiungo a class table //devo considerare overriding  
+                                  //FunNode m = new FunNode($fid.text.$fty.ast);
+                                  MethodNode m = new MethodNode($fid.text.$fty.ast, methodOffset++);
+                                  cn.addMethod(m);//aggiungo a ClassNode
+                                  c.addMethod(m); //aggiungo a CTentry
                                  }
-      LPAR (pidf=ID COLON ptyf=type 
-                                    {
-                                     m.addPar(new ParNode($pidf.text, $ptyf.ast));
-                                    }
+      LPAR 
+           {
+            ArrayList<Node> parTypes = new ArrayList<Node>();//creo lista tipi di parametro per arrow e controllo overloading
+           }
+      (pidf=ID COLON ptyf=type 
+                               {
+                                //aggiungo alla symbol table
+                                if (hmf.put($pidf.text, new STentry(nestingLevel, $ptyf.ast, fparOffset++)) != null) {
+                                	System.out.println("Parameter id " + $pidf.text + " at line " + $pidf.line + " already declared");
+                                	System.exit(0);
+                                }
+                                //aggiungo al MethodNode
+                                m.addPar(new ParNode($pidf.text, $ptyf.ast));
+                                //aggiungo i tipi di parametro nella lista dei tipi di parametro
+                                parTypes.add($ptyf.ast);
+                               }
         (COMMA pidf2=ID COLON ptyf2=type 
                                          {
                                           m.addPar(new ParNode($pidf2.text, $ptyf2.ast));
-                                         })*)? RPAR (LET 
+                                          parTypes.add($ptyf2.ast);
+                                         })*)? RPAR 
+                                                    {
+                                                     
+                                                    }
+      (LET (VAR vid=ID COLON vty=basic ASS ve=expr SEMIC 
                                                          {
-                                                          ArrayList<Node> vlist = new ArrayList<Node>();
-                                                         }
-        (VAR vid=ID COLON vty=basic ASS ve=expr SEMIC 
-                                                      {
-                                                       VarNode vn = new VarNode($vid.text, $vty.ast, $ve.ast);
-                                                       vlist.add(vn);
-                                                      })* IN)? le=expr SEMIC 
-                                                                             {
-                                                                              cn.addLetIn(new LetInNode(vlist, $le.ast));
-                                                                             }
+                                                          cn.addField(new VarNode($vid.text, $vty.ast, $ve.ast));
+                                                         })* IN)? le=expr SEMIC 
+                                                                                {
+                                                                                 cn.addBody($le.ast);
+                                                                                }
     )*
     CRPAR
   )*
@@ -224,18 +289,18 @@ arrow returns [Node ast] //capire a cosa serve typeOffset simile a parOffset
        }
   (t1=type 
            {
-            parType.add($t1.ast);
+            parTypes.add($t1.ast);
            }
     (COMMA t2=type 
                    {
-                    parType.add($t2.ast)
+                    parTypes.add($t2.ast);
                    }
       
        {
         
        })*)? RPAR ARROW r=basic 
                                 {
-                                 return new ArrowTypeNode(parTypes, $r.ast)
+                                 return new ArrowTypeNode(parTypes, $r.ast);
                                 }
   ;
 
@@ -321,7 +386,7 @@ value returns [Node ast]
           }
   | NULL 
          {
-          $ast = new EmptyNode()
+          $ast = new EmptyNode();
          }
   | NEW ID LPAR (expr (COMMA expr)*)? RPAR
   | LPAR e=expr RPAR 

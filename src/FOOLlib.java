@@ -10,7 +10,7 @@ public class FOOLlib {
 
 	private static HashMap<String, String> superType = null;
 
-	public void putSuperType(HashMap<String, String> hm) {
+	public static void putSuperType(HashMap<String, String> hm) {
 		superType = hm;
 	}
 

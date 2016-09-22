@@ -3,6 +3,7 @@ public class STentry {
 	private int nl;
 	private Node type;
 	private int offset;
+	private boolean isMethod;
 
 	public STentry(int n, int o) {
 		nl = n;
@@ -13,6 +14,16 @@ public class STentry {
 		nl = n;
 		type = t;
 		offset = o;
+	}
+
+	public STentry(int n, int o, boolean b) {
+		nl = n;
+		offset = o;
+		isMethod = b;
+	}
+
+	public boolean isMethod() {
+		return isMethod;
 	}
 
 	public void addType(Node t) {

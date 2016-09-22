@@ -25,6 +25,10 @@ public class FunNode implements Node {
 		parlist.add(p);
 	}
 
+	public String getId() {
+		return id;
+	}
+
 	public String toPrint(String s) {
 		String parlstr = "";
 		for (Node par : parlist)

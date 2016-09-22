@@ -1,10 +1,15 @@
 
-public class FieldNode extends VarNode {
+public class FieldNode extends ParNode {
 
-	public FieldNode(String i, Node t, Node v, int o) {
-		super(i, t, v);
-		
-		// TODO Auto-generated constructor stub
+	private int offset;
+
+	public FieldNode(String i, Node t, int o) {
+		super(i, t);
+		offset = o;
+	}
+
+	public int getOffset() {
+		return offset;
 	}
 
 }
