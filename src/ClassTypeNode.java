@@ -6,6 +6,10 @@ public class ClassTypeNode implements Node {
 	public ClassTypeNode(String s) {
 		id = s;
 	}
+	
+	public String getId(){
+		return id;
+	}
 
 	@Override
 	public String toPrint(String s) {

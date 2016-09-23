@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 //entry che memorizza le informazioni di un campo all'interno della classe
-public class CTentry<V, K> {
+public class CTentry {
 	private HashMap<String, STentry> vTable = new HashMap<String, STentry>();
 	private int offsetFields;
 	private int offsetMethods;
@@ -59,5 +59,13 @@ public class CTentry<V, K> {
 
 	public int getOffsetMethods() {
 		return offsetMethods;
+	}
+
+	public ArrayList<Node> fieldTypeList() {
+		ArrayList<Node> types = new ArrayList<Node>();
+		for (Node n : allFields) {
+			types.add(n.typeCheck());
+		}
+		return types;
 	}
 }

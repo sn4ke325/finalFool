@@ -22,6 +22,7 @@ private int offset = -2;
 /*------------------------------------------------------------------
  * PARSER RULES
  *------------------------------------------------------------------*/
+//modificare ClassNode perchè riceva ST entry e nesting level nel costruttore
 
 
 prog returns [Node ast]
@@ -293,17 +294,14 @@ basic returns [Node ast]
          {
           $ast = new BoolTypeNode();
          }
-  | i=ID 
-         {
-          int j = nestingLevel;
-          STentry entry = null;
-          while (j >= 0 && entry == null)
-          	entry = (symTable.get(j--)).get($i.text);
-          if (entry == null) {
-          	System.out.println("Id " + $i.text + " at line " + $i.line + " not declared");
+  | i=ID //è il tipo della classe
+  {
+          if (!clTable.containsKey($i.text)) {
+          	System.out.println("Class type " + $i.text + " at line " + $i.line + " not declared");
           	System.exit(0);
           }
-          $ast = new IdNode($i.text, entry, nestingLevel - j - 1);
+          
+          $ast = new ClassTypeNode($i.text);
          }
   ;
 
@@ -414,7 +412,41 @@ value returns [Node ast]
          {
           $ast = new EmptyNode();
          }
-  | NEW ID LPAR (expr (COMMA expr)*)? RPAR
+  | NEW i=ID LPAR 
+                  {
+                   if (!clTable.containsKey($i.text)) {
+                   	System.out.println("Class type " + $i.text + " at line " + $i.line + " not declared");
+                   	System.exit(0);
+                   }
+                   $ast = new NewNode($i.text, clTable.get($i.text));
+                   ArrayList<Node> par = new ArrayList<Node>();
+                  }
+  (e1=expr 
+           {
+            par.add($e1.ast);
+           }
+    (COMMA e2=expr 
+                   {
+                    par.add($e2.ast);
+                   })* 
+                       {
+                        $ast = new NewNode($i.text, par, clTable.get($i.text));
+                       })? RPAR 
+                                {
+                                 ArrayList<Node> classFieldTypes = clTable.get($i.text).fieldTypeList();
+                                 if (classFieldTypes.size() != par.size()) {
+                                 	System.out.println("Params of " + $i.text + " at line " + $i.line + " do not correspond to declared");
+                                 	System.exit(0);
+                                 } else {
+                                 	int k = 0;
+                                 	for (Node node : par) {
+                                 		if (!node.typeCheck().equals(classFieldTypes.get(k++))) {
+                                 			System.out.println("Params of " + $i.text + "at line " + $i.line + " do not correspond to declared");
+                                 			System.exit(0);
+                                 		}
+                                 	}
+                                 }
+                                }
   | LPAR e=expr RPAR 
                      {
                       $ast = $e.ast;
@@ -431,27 +463,101 @@ value returns [Node ast]
                            {
                             $ast = new PrintNode($e.ast);
                            }
-/*| i=ID {//cercare la dichiarazione
-    int j=nestingLevel;
-    STentry entry=null; 
-    while (j>=0 && entry==null)
-      entry=(symTable.get(j--)).get($i.text);
-    if (entry==null)
-      {System.out.println("Id "+$i.text+" at line "+$i.line+" not declared");
-       System.exit(0);}               
-	  $ast= new IdNode($i.text,entry,nestingLevel-j-1);}  
-	  ( LPAR {ArrayList<Node> argList = new ArrayList<Node>();} 
-	    (fa=expr {argList.add($fa.ast);}
-	      (COMMA a=expr {argList.add($a.ast);})* 
-	    )? {$ast=new CallNode($i.text,entry,argList,nestingLevel-j-1);}	     
-	    RPAR 
-	   )?*/
-
-  | ID
+  | i=ID 
+         {
+         boolean isClassType = false;//flag che mi dice se la variabile punta ad un oggetto(classe) o altro (Int, bool)
+          boolean isCall = false; //flag che mi dice se ho scritto le parentesi della call 
+          boolean isClassCall = false;//flag che mi dice se ho scritto la sintassi della class call
+          //caso 1
+          //ID si riferisce ad una variabile richiamata nel corpo del programma
+          //devo verificare se la variabile è stato dichiarata e quindi inserita nella symbol table
+          boolean declared = false;
+          STentry entry = null;
+          for (HashMap<String, STentry> hm : symTable) {
+          	if (hm.containsKey($i.text)) {
+          		entry = hm.get($i.text);
+          		declared = true;
+          		break;
+          	}
+          }
+          if (!declared) {
+          	System.out.println("Var " + $i.text + " at line " + $i.line + " is not declared");
+          	System.exit(0);
+          }
+          
+          //devo controllare se la variabile è di tipo oggetto o di tipo "normale"
+          isClassType = (entry.getType() instanceof ClassTypeNode);//<-----------------continuare qui
+         //clTable.get(entry.getType().getId()); 
+          //devo inserire il nesting level di dove sto chiamando ID, la symbol table mi assicura che la variabile sia stata dichiarata(o meno) nello stesso scope o in uno più ampio
+          $ast = new IdNode($i.text, entry, nestingLevel);
+          //devo controllare che non venga chiamata una classe senza parentesi
+         }
   (
-    LPAR (expr (COMMA expr)*)? RPAR
-    | DOT ID LPAR (expr (COMMA expr)*)? RPAR
-  )
+    LPAR 
+         {
+          //caso 2
+          //Call
+          ArrayList<Node> par = new ArrayList<Node>();
+         }
+    (e1=expr 
+             {
+              par.add($e1.ast);
+             }
+      (COMMA e2=expr 
+                     {
+                      par.add($e2.ast);
+                     })*)? RPAR 
+                                {
+                                 isCall = true;
+                                 //controllo se la classe sia presente nella class table
+                                 if (!clTable.containsKey($i.text)) {
+                                 	System.out.println("Class type " + $i.text + " at line " + $i.line + " not declared");
+                                 	System.exit(0);
+                                 }
+                                 //controllo che la lista di parametri della chiamata corrisponda con la lista di parametri dichiarati nella classe
+                                 ArrayList<Node> classFieldTypes = clTable.get($i.text).fieldTypeList();
+                                 if (classFieldTypes.size() != par.size()) {
+                                 	System.out.println("Params of " + $i.text + " at line " + $i.line + " do not correspond to declared");
+                                 	System.exit(0);
+                                 } else {
+                                 	int k = 0;
+                                 	for (Node node : par) {
+                                 		if (!node.typeCheck().equals(classFieldTypes.get(k++))) {
+                                 			System.out.println("Params of " + $i.text + "at line " + $i.line + " do not correspond to declared");
+                                 			System.exit(0);
+                                 		}
+                                 	}
+                                 }
+                                 
+                                 $ast = new CallNode($i.text, entry, par, nestingLevel);
+                                }
+    | DOT i2=ID LPAR 
+                     {
+                      ArrayList<Node> par = new ArrayList<Node>();
+                     }
+    (e1=expr 
+             {
+              par.add($e1.ast);
+             }
+      (COMMA e2=expr 
+                     {
+                      par.add($e2.ast);
+                     })*)? RPAR 
+                                {
+                                 isClassCall = true;
+                                 //ho una variabile che punta ad un oggetto di tipo classType
+                                 //devi riuscire a ottenere la lista di metodi per controllare che esista il metodo invocato e inoltre controllare che gli argomenti corrispondano ai parametri del metodo
+                                //clTable.get(entry.getType().getId());
+                                }
+  )?
+  
+   {
+    if ((entry.isMethod() || entry.getType() == null) && !(isCall || isClassCall)) {
+    	//errore! ho scritto id senza parentesi o punto. id è una classe o metodo, non una variabile ma ho voluto chiamarla come variabile
+    	System.out.println("Id  " + $i.text + " at line " + $i.line + " is not a variable");
+    	System.exit(0);
+    }
+   }
   ;
 /*------------------------------------------------------------------
  * LEXER RULES
