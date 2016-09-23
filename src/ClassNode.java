@@ -4,7 +4,6 @@ public class ClassNode implements Node {
 	private String id;
 	private ArrayList<Node> methods = new ArrayList<Node>();
 	private ArrayList<Node> fields = new ArrayList<Node>();
-	private Node body;
 
 	public ClassNode(String l) {
 		id = l;
@@ -20,10 +19,6 @@ public class ClassNode implements Node {
 
 	public String getId() {
 		return id;
-	}
-
-	public void addBody(Node b) {
-		body = b;
 	}
 
 	@Override

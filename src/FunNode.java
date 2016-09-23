@@ -29,6 +29,10 @@ public class FunNode implements Node {
 		return id;
 	}
 
+	public Node getType() {
+		return type;
+	}
+
 	public String toPrint(String s) {
 		String parlstr = "";
 		for (Node par : parlist)

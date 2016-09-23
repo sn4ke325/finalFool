@@ -11,8 +11,8 @@ public class CTentry<V, K> {
 	private ArrayList<Node> allMethods = new ArrayList<Node>();
 
 	public CTentry() {
-		offsetFields = -2;
-		offsetMethods = 0;
+		offsetFields = -2;// decrementa
+		offsetMethods = 0;// incrementa
 	}
 
 	public void extendsClass(CTentry sc) {// sc=superclass
@@ -24,17 +24,20 @@ public class CTentry<V, K> {
 
 	}
 
-	public void addField(FieldNode f) {
-
+	public Node addField(String id, Node ty, int nl) {
+		FieldNode n = new FieldNode(id, ty);
+		allFields.add(n);
+		vTable.put(id, new STentry(nl, ty, offsetFields--));
+		return n;
 	}
 
-	public void addMethod(MethodNode m) {
-		
-		if(vTable.get(m.getId()) != null){
-			//vTable.put(m.getId(), new STentry())
-		}
-		
-		allMethods.add(m);
+	public Node addMethod(String id, Node ty, int nl) {
+		MethodNode n = new MethodNode(id, ty);
+		allMethods.add(n);
+		STentry entry = new STentry(nl, ty, offsetMethods++);
+		entry.setAsMethod(true);
+		vTable.put(id, entry);
+		return n;
 
 	}
 

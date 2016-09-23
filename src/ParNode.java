@@ -8,6 +8,14 @@ public class ParNode implements Node {
 		type = t;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public Node getType() {
+		return type;
+	}
+
 	public String toPrint(String s) {
 		return s + "Par:" + id + "\n" + type.toPrint(s + "  ");
 	}

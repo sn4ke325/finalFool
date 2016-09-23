@@ -16,14 +16,12 @@ public class STentry {
 		offset = o;
 	}
 
-	public STentry(int n, int o, boolean b) {
-		nl = n;
-		offset = o;
-		isMethod = b;
-	}
-
 	public boolean isMethod() {
 		return isMethod;
+	}
+
+	public void setAsMethod(boolean b) {
+		isMethod = b;
 	}
 
 	public void addType(Node t) {

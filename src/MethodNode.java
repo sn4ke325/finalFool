@@ -1,16 +1,15 @@
 
 public class MethodNode extends FunNode {
 
-	private int offset;
+	// private int offset;
 
-	public MethodNode(String i, Node t, int o) {
+	public MethodNode(String i, Node t/* , int o */) {
 		super(i, t);
-		offset = o;
+		// offset = o;
 		// TODO Auto-generated constructor stub
 	}
-
-	public int getOffset() {
-		return offset;
-	}
+	/*
+	 * public int getOffset() { return offset; }
+	 */
 
 }
