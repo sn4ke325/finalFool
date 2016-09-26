@@ -33,6 +33,10 @@ public class FunNode implements Node {
 		return type;
 	}
 
+	public void setArrowType(ArrowTypeNode n) {
+		type = n;
+	}
+
 	public String toPrint(String s) {
 		String parlstr = "";
 		for (Node par : parlist)

@@ -24,20 +24,32 @@ public class CTentry {
 
 	}
 
-	public Node addField(String id, Node ty, int nl) {
+	/*public Node addField(String id, Node ty, int nl) {
 		FieldNode n = new FieldNode(id, ty);
 		allFields.add(n);
 		vTable.put(id, new STentry(nl, ty, offsetFields--));
 		return n;
+	}*/
+
+	public void addField(FieldNode field, int nl) {
+		allFields.add(field);
+		vTable.put(field.getId(), new STentry(nl, field.getType(), offsetFields--));
 	}
 
-	public Node addMethod(String id, Node ty, int nl) {
-		MethodNode n = new MethodNode(id, ty);
-		allMethods.add(n);
-		STentry entry = new STentry(nl, ty, offsetMethods++);
+	/*
+	 * public Node addMethod(String id, Node ty, int nl) { MethodNode n = new
+	 * MethodNode(id, ty); allMethods.add(n); STentry entry = new STentry(nl,
+	 * ty, offsetMethods++); entry.setAsMethod(true); vTable.put(id, entry);
+	 * return n;
+	 * 
+	 * }
+	 */
+
+	public void addMethod(MethodNode method, int nl) {
+		allMethods.add(method);
+		STentry entry = new STentry(nl, method.getType(), offsetMethods++);
 		entry.setAsMethod(true);
-		vTable.put(id, entry);
-		return n;
+		vTable.put(method.getId(), entry);
 
 	}
 

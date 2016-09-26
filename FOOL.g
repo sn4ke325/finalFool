@@ -94,37 +94,27 @@ cllist returns [ArrayList < Node > astlist]
                         }
     LPAR (pid=ID COLON ptype=basic 
                                    {
+                                    FieldNode field = new FieldNode($pid.text, $ptype.ast);
                                     //aggiungo il nodo del field alla lista dentro ClassNode
-                                    cn.addField(new FieldNode($pid.text, $ptype.ast));
+                                    cn.addField(field);
                                     //aggiungo il campo nella virtual table
-                                    c.addField($pid.text, $ptype.ast, nestingLevel);
+                                    c.addField(field, nestingLevel);
                                    }
       (COMMA pid2=ID COLON ptype2=basic 
                                         {
                                          //controllo che non sia già stato inserito (escludendo ereditarietà)
-                                         FieldNode n = new FieldNode($pid2.text, $ptype2.ast);
-                                         if (cn.getFields().contains(n)) {//se è già stato inserito un campo uguale->errore
+                                         field = new FieldNode($pid2.text, $ptype2.ast);
+                                         if (cn.getFields().contains(field)) {//se è già stato inserito un campo uguale->errore
                                          	System.out.println("Field " + $pid2.text + " at line " + $pid2.line + " declared multiple times in this scope");
                                          	System.exit(0);
                                          }
-                                         cn.addField(n);
-                                         c.addField($pid2.text, $ptype2.ast, nestingLevel);
+                                         cn.addField(field);
+                                         c.addField(field, nestingLevel);
                                         })*)? RPAR CLPAR
     (
       FUN fid=ID COLON fty=basic 
                                  {
-                                  //controllo che il metodo non sia già stato dichiarato per la stessa classe
-                                  MethodNode syntaxmethod = new MethodNode($fid.text, $fty.ast);
-                                  
-                                  if (cn.getMethods().contains(syntaxmethod)) {//se il metodo è già stato scritto per questa classe (escludendo metodi ereditati) -> errore
-                                  	System.out.println("Method " + $fid.text + " at line " + $fid.line + " declared multiple times in this class");
-                                  	System.exit(0);
-                                  }
-                                  //aggiungo il methodNode al class Node                                  
-                                  cn.addMethod(syntaxmethod);
-                                  //aggiungo il metodo alla CTentry
-                                  MethodNode classmethod = (MethodNode) c.addMethod($fid.text, $fty.ast, nestingLevel);
-                                  
+                                  MethodNode method = new MethodNode($fid.text, $fty.ast);
                                   //entro nello scope del method
                                   nestingLevel++;
                                   HashMap<String, STentry> hmn = new HashMap<String, STentry>();
@@ -138,16 +128,14 @@ cllist returns [ArrayList < Node > astlist]
            }
       (pidf=ID COLON ptyf=type 
                                {
-                                //aggiungo alla symbol table
+                                //aggiungo parametro alla symbol table
                                 if (hmn.put($pidf.text, new STentry(nestingLevel, $ptyf.ast, fparOffset++)) != null) {
                                 	System.out.println("Parameter id " + $pidf.text + " at line " + $pidf.line + " already declared");
                                 	System.exit(0);
                                 }
                                 ParNode param = new ParNode($pidf.text, $ptyf.ast);
-                                //aggiungo al method in class node
-                                syntaxmethod.addPar(param);
-                                //aggiungo al method in Class table
-                                classmethod.addPar(param);
+                                //aggiungo al method
+                                method.addPar(param);
                                 //aggiungo i tipi di parametro nella lista dei tipi di parametro
                                 parTypes.add($ptyf.ast);
                                }
@@ -158,17 +146,28 @@ cllist returns [ArrayList < Node > astlist]
                                           	System.out.println("Parameter id " + $pidf2.text + " at line " + $pidf2.line + " already declared");
                                           	System.exit(0);
                                           }
-                                          //aggiungo a Class Node
                                           param = new ParNode($pidf2.text, $ptyf2.ast);
-                                          //aggiungo al method in class node
-                                          syntaxmethod.addPar(param);
-                                          //aggiungo al method in Class table
-                                          classmethod.addPar(param);
+                                          //aggiungo al method
+                                          method.addPar(param);
                                           //aggiungo i tipi di parametro nella lista dei tipi di parametro
                                           parTypes.add($ptyf2.ast);
                                          })*)? RPAR 
                                                     {
-                                                     vTable.get($fid.text).addType(new ArrowTypeNode(parTypes, $fty.ast));
+                                                     //aggiungo il tipo Arrow al metodo solo se il metodo ha parametri, altrimenti il tipo rimane solo quello di ritorno
+                                                     method.setArrowType(new ArrowTypeNode(parTypes, $fty.ast));
+                                                     
+                                                     //una volta scritti tutti i parametri controllo se il metodo è già stato inserito
+                                                     for (Node n : cn.getMethods()) {
+                                                     	if (((MethodNode) n).getId().equals($fid.text)) {
+                                                     		System.out.println("Method " + $fid.text + " at line " + $fid.line + " is declared multiple times");
+                                                     		System.exit(0);
+                                                     	}
+                                                     }
+                                                     
+                                                     //aggiungo il methodNode al class Node                                  
+                                                     cn.addMethod(method);
+                                                     //aggiungo il metodo alla CTentry (si aggiunge automaticamente anche alla symbol table visto che condividono la stessa virtual table)
+                                                     c.addMethod(method, nestingLevel - 1);//siccome sono già entrato nel nuovo scope e a me serve lo scope della classe devo usare il livello precedente
                                                     }
       (LET 
            {
@@ -185,21 +184,21 @@ cllist returns [ArrayList < Node > astlist]
                                                        varlist.add(new VarNode($vid.text, $vty.ast, $ve.ast));
                                                       })* IN 
                                                              {
-                                                              //aggiungo a Method node in ClassNode
-                                                              syntaxmethod.addDec(varlist);
-                                                              //aggiungo a Method node in CTentry
-                                                              classmethod.addDec(varlist);
+                                                              //aggiungo a Method 
+                                                              method.addDec(varlist);
                                                              })? le=expr SEMIC 
                                                                                {
-                                                                                //aggiungo body a metodo del syntax tree
-                                                                                syntaxmethod.addBody($le.ast);
-                                                                                //Aggiungo body al metodo in ctentry
-                                                                                classmethod.addBody($le.ast);
+                                                                                //aggiungo body a metodo
+                                                                                method.addBody($le.ast);
                                                                                 //esco dallo scope del metodo
                                                                                 symTable.remove(nestingLevel--);
                                                                                }
     )*
-    CRPAR
+    CRPAR 
+          {
+           //esco dallo scope della classe
+           symTable.remove(nestingLevel--);
+          }
   )*
   d=declist 
             {
@@ -426,6 +425,7 @@ value returns [Node ast]
          }
   | NEW i=ID LPAR 
                   {
+                   //controllo che la classe sia stata dichiarata
                    if (!clTable.containsKey($i.text)) {
                    	System.out.println("Class type " + $i.text + " at line " + $i.line + " not declared");
                    	System.exit(0);
