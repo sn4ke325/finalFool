@@ -3,11 +3,11 @@ public class ClassCallNode implements Node {
 
 	private String id1;
 	private String id2;
-	private CTentry entry;
-	private CTentry methodEntry;
+	private STentry entry;
+	private STentry methodEntry;
 	private int nl;
 
-	public ClassCallNode(String s1, String s2, CTentry e, CTentry me, int n) {
+	public ClassCallNode(String s1, String s2, STentry e, STentry me, int n) {
 		id1 = s1;
 		id2 = s2;
 		entry = e;
@@ -16,7 +16,7 @@ public class ClassCallNode implements Node {
 	}
 
 	@Override
-	public String toPrint(String indent) {
+	public String toPrint(String s) {
 		// TODO Auto-generated method stub
 		return null;
 	}

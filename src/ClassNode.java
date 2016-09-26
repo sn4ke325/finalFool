@@ -20,6 +20,14 @@ public class ClassNode implements Node {
 	public String getId() {
 		return id;
 	}
+	
+	public ArrayList<Node> getFields(){
+		return fields;
+	}
+	
+	public ArrayList<Node> getMethods(){
+		return methods;
+	}
 
 	@Override
 	public String toPrint(String indent) {

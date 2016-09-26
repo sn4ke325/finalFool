@@ -101,14 +101,26 @@ cllist returns [ArrayList < Node > astlist]
                                    }
       (COMMA pid2=ID COLON ptype2=basic 
                                         {
-                                         cn.addField(new FieldNode($pid2.text, $ptype2.ast));
+                                         //controllo che non sia già stato inserito (escludendo ereditarietà)
+                                         FieldNode n = new FieldNode($pid2.text, $ptype2.ast);
+                                         if (cn.getFields().contains(n)) {//se è già stato inserito un campo uguale->errore
+                                         	System.out.println("Field " + $pid2.text + " at line " + $pid2.line + " declared multiple times in this scope");
+                                         	System.exit(0);
+                                         }
+                                         cn.addField(n);
                                          c.addField($pid2.text, $ptype2.ast, nestingLevel);
                                         })*)? RPAR CLPAR
     (
       FUN fid=ID COLON fty=basic 
                                  {
-                                  //aggiungo il methodNode al class Node
+                                  //controllo che il metodo non sia già stato dichiarato per la stessa classe
                                   MethodNode syntaxmethod = new MethodNode($fid.text, $fty.ast);
+                                  
+                                  if (cn.getMethods().contains(syntaxmethod)) {//se il metodo è già stato scritto per questa classe (escludendo metodi ereditati) -> errore
+                                  	System.out.println("Method " + $fid.text + " at line " + $fid.line + " declared multiple times in this class");
+                                  	System.exit(0);
+                                  }
+                                  //aggiungo il methodNode al class Node                                  
                                   cn.addMethod(syntaxmethod);
                                   //aggiungo il metodo alla CTentry
                                   MethodNode classmethod = (MethodNode) c.addMethod($fid.text, $fty.ast, nestingLevel);
@@ -465,7 +477,7 @@ value returns [Node ast]
                            }
   | i=ID 
          {
-         boolean isClassType = false;//flag che mi dice se la variabile punta ad un oggetto(classe) o altro (Int, bool)
+          // boolean isClassType = false;//flag che mi dice se la variabile punta ad un oggetto(classe) o altro (Int, bool)
           boolean isCall = false; //flag che mi dice se ho scritto le parentesi della call 
           boolean isClassCall = false;//flag che mi dice se ho scritto la sintassi della class call
           //caso 1
@@ -485,9 +497,9 @@ value returns [Node ast]
           	System.exit(0);
           }
           
-          //devo controllare se la variabile è di tipo oggetto o di tipo "normale"
-          isClassType = (entry.getType() instanceof ClassTypeNode);//<-----------------continuare qui
-         //clTable.get(entry.getType().getId()); 
+          //devo controllare se la variabile è di tipo oggetto o di tipo "normale" per verificare in qualche modo se il valore assegnato è corretto (es a var int si assegnano solo interi) 
+          // isClassType = (entry.getType() instanceof ClassTypeNode);//<-----------------continuare qui
+          
           //devo inserire il nesting level di dove sto chiamando ID, la symbol table mi assicura che la variabile sia stata dichiarata(o meno) nello stesso scope o in uno più ampio
           $ast = new IdNode($i.text, entry, nestingLevel);
           //devo controllare che non venga chiamata una classe senza parentesi
@@ -497,6 +509,7 @@ value returns [Node ast]
          {
           //caso 2
           //Call
+          //dobbiamo verificare se ID è un metodo di una classe e arrowtype corrisponde
           ArrayList<Node> par = new ArrayList<Node>();
          }
     (e1=expr 
@@ -508,21 +521,21 @@ value returns [Node ast]
                       par.add($e2.ast);
                      })*)? RPAR 
                                 {
-                                 isCall = true;
-                                 //controllo se la classe sia presente nella class table
-                                 if (!clTable.containsKey($i.text)) {
-                                 	System.out.println("Class type " + $i.text + " at line " + $i.line + " not declared");
+                                 if (!entry.isMethod()) {
+                                 	System.out.println("Class type " + $i.text + " at line " + $i.line + " is not a delcared method");
                                  	System.exit(0);
                                  }
+                                 isCall = true;
                                  //controllo che la lista di parametri della chiamata corrisponda con la lista di parametri dichiarati nella classe
-                                 ArrayList<Node> classFieldTypes = clTable.get($i.text).fieldTypeList();
-                                 if (classFieldTypes.size() != par.size()) {
+                                 ArrowTypeNode atnode = (ArrowTypeNode) entry.getType();
+                                 ArrayList<Node> dectypes = atnode.getParList();
+                                 if (dectypes.size() != par.size()) {
                                  	System.out.println("Params of " + $i.text + " at line " + $i.line + " do not correspond to declared");
                                  	System.exit(0);
                                  } else {
                                  	int k = 0;
                                  	for (Node node : par) {
-                                 		if (!node.typeCheck().equals(classFieldTypes.get(k++))) {
+                                 		if (!node.typeCheck().equals(dectypes.get(k++))) {
                                  			System.out.println("Params of " + $i.text + "at line " + $i.line + " do not correspond to declared");
                                  			System.exit(0);
                                  		}
@@ -544,16 +557,46 @@ value returns [Node ast]
                       par.add($e2.ast);
                      })*)? RPAR 
                                 {
+                                 //controllo se la variabile è di tipo classe quindi può puntare ad un oggetto classe
+                                 if (!(entry.getType() instanceof ClassTypeNode)) {
+                                 	System.out.println("Var" + $i.text + "at line " + $i.line + " is not a class type variable");
+                                 	System.exit(0);
+                                 }
+                                 //controllo se il metodo è stato dichiarato all'interno della classe richiamata prima del punto e mi salvo la sua STentry
+                                 HashMap<String, STentry> vtable = clTable.get($i.text).getVTable();
+                                 STentry methodentry = null;
+                                 if (vtable.containsKey($i2.text)) {
+                                 	methodentry = vtable.get($i2.text);
+                                 } else {
+                                 	System.out.println("Method " + $i2.text + "at line " + $i2.line + " is not declared for class " + $i.text);
+                                 	System.exit(0);
+                                 }
+                                 //controllo se i tipi di ingresso del metodo richiamato corrispondono con quelli del metodo dichiarato
+                                 ArrowTypeNode atnode = (ArrowTypeNode) entry.getType();
+                                 ArrayList<Node> dectypes = atnode.getParList();
+                                 if (dectypes.size() != par.size()) {
+                                 	System.out.println("Params of " + $i.text + " at line " + $i.line + " do not correspond to declared");
+                                 	System.exit(0);
+                                 } else {
+                                 	int k = 0;
+                                 	for (Node node : par) {
+                                 		if (!node.typeCheck().equals(dectypes.get(k++))) {
+                                 			System.out.println("Params of " + $i.text + "at line " + $i.line + " do not correspond to declared");
+                                 			System.exit(0);
+                                 		}
+                                 	}
+                                 }
+                                 
                                  isClassCall = true;
-                                 //ho una variabile che punta ad un oggetto di tipo classType
-                                 //devi riuscire a ottenere la lista di metodi per controllare che esista il metodo invocato e inoltre controllare che gli argomenti corrispondano ai parametri del metodo
-                                //clTable.get(entry.getType().getId());
+                                 
+                                 $ast = new ClassCallNode($i.text, $i2.text, entry, methodentry, nestingLevel);
+                                 //ID1 è una variabile che punta ad un oggetto di tipo classType
                                 }
   )?
   
    {
-    if ((entry.isMethod() || entry.getType() == null) && !(isCall || isClassCall)) {
-    	//errore! ho scritto id senza parentesi o punto. id è una classe o metodo, non una variabile ma ho voluto chiamarla come variabile
+    if ((entry.isMethod()) && !(isCall || isClassCall)) {
+    	//errore! ho scritto id senza parentesi o punto. id è un metodo, non una variabile ma ho voluto chiamarla come variabile
     	System.out.println("Id  " + $i.text + " at line " + $i.line + " is not a variable");
     	System.exit(0);
     }
