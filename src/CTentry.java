@@ -24,12 +24,11 @@ public class CTentry {
 
 	}
 
-	/*public Node addField(String id, Node ty, int nl) {
-		FieldNode n = new FieldNode(id, ty);
-		allFields.add(n);
-		vTable.put(id, new STentry(nl, ty, offsetFields--));
-		return n;
-	}*/
+	/*
+	 * public Node addField(String id, Node ty, int nl) { FieldNode n = new
+	 * FieldNode(id, ty); allFields.add(n); vTable.put(id, new STentry(nl, ty,
+	 * offsetFields--)); return n; }
+	 */
 
 	public void addField(FieldNode field, int nl) {
 		allFields.add(field);

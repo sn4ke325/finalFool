@@ -153,7 +153,7 @@ cllist returns [ArrayList < Node > astlist]
                                           parTypes.add($ptyf2.ast);
                                          })*)? RPAR 
                                                     {
-                                                     //aggiungo il tipo Arrow al metodo solo se il metodo ha parametri, altrimenti il tipo rimane solo quello di ritorno
+                                                     //aggiungo il tipo Arrow al metodo
                                                      method.setArrowType(new ArrowTypeNode(parTypes, $fty.ast));
                                                      
                                                      //una volta scritti tutti i parametri controllo se il metodo è già stato inserito
@@ -316,7 +316,7 @@ basic returns [Node ast]
          }
   ;
 
-arrow returns [Node ast] //capire a cosa serve typeOffset simile a parOffset
+arrow returns [Node ast] 
   :
   LPAR 
        {
@@ -444,7 +444,7 @@ value returns [Node ast]
                        {
                         $ast = new NewNode($i.text, par, clTable.get($i.text));
                        })? RPAR 
-                                {
+                                {//controllo che i tipi corrispondano con quelli dichiarati
                                  ArrayList<Node> classFieldTypes = clTable.get($i.text).fieldTypeList();
                                  if (classFieldTypes.size() != par.size()) {
                                  	System.out.println("Params of " + $i.text + " at line " + $i.line + " do not correspond to declared");
@@ -522,13 +522,12 @@ value returns [Node ast]
                      })*)? RPAR 
                                 {
                                  if (!entry.isMethod()) {
-                                 	System.out.println("Class type " + $i.text + " at line " + $i.line + " is not a delcared method");
+                                 	System.out.println("Id " + $i.text + " at line " + $i.line + " is not a declared method");
                                  	System.exit(0);
                                  }
                                  isCall = true;
                                  //controllo che la lista di parametri della chiamata corrisponda con la lista di parametri dichiarati nella classe
-                                 ArrowTypeNode atnode = (ArrowTypeNode) entry.getType();
-                                 ArrayList<Node> dectypes = atnode.getParList();
+                                 ArrayList<Node> dectypes = ((ArrowTypeNode) entry.getType()).getParList();
                                  if (dectypes.size() != par.size()) {
                                  	System.out.println("Params of " + $i.text + " at line " + $i.line + " do not correspond to declared");
                                  	System.exit(0);
@@ -545,16 +544,16 @@ value returns [Node ast]
                                  $ast = new CallNode($i.text, entry, par, nestingLevel);
                                 }
     | DOT i2=ID LPAR 
-                     {
-                      ArrayList<Node> par = new ArrayList<Node>();
+                     {//Caso 3: Class call ID1 è la variabile che punta ad un un oggetto di tipo classe. ID2 è un metodo per quella classe
+                      ArrayList<Node> arg = new ArrayList<Node>();
                      }
     (e1=expr 
              {
-              par.add($e1.ast);
+              arg.add($e1.ast);
              }
       (COMMA e2=expr 
                      {
-                      par.add($e2.ast);
+                      arg.add($e2.ast);
                      })*)? RPAR 
                                 {
                                  //controllo se la variabile è di tipo classe quindi può puntare ad un oggetto classe
@@ -563,7 +562,8 @@ value returns [Node ast]
                                  	System.exit(0);
                                  }
                                  //controllo se il metodo è stato dichiarato all'interno della classe richiamata prima del punto e mi salvo la sua STentry
-                                 HashMap<String, STentry> vtable = clTable.get($i.text).getVTable();
+                                // String classTypeName=((ClassTypeNode) entry.getType()).getId();//recupero il nome del tipo della classe 
+                                 HashMap<String, STentry> vtable = clTable.get(((ClassTypeNode) entry.getType()).getId()).getVTable();
                                  STentry methodentry = null;
                                  if (vtable.containsKey($i2.text)) {
                                  	methodentry = vtable.get($i2.text);
@@ -572,14 +572,13 @@ value returns [Node ast]
                                  	System.exit(0);
                                  }
                                  //controllo se i tipi di ingresso del metodo richiamato corrispondono con quelli del metodo dichiarato
-                                 ArrowTypeNode atnode = (ArrowTypeNode) entry.getType();
-                                 ArrayList<Node> dectypes = atnode.getParList();
-                                 if (dectypes.size() != par.size()) {
+                                 ArrayList<Node> dectypes =((ArrowTypeNode) methodentry.getType()).getParList();
+                                 if (dectypes.size() != arg.size()) {
                                  	System.out.println("Params of " + $i.text + " at line " + $i.line + " do not correspond to declared");
                                  	System.exit(0);
                                  } else {
                                  	int k = 0;
-                                 	for (Node node : par) {
+                                 	for (Node node : arg) {
                                  		if (!node.typeCheck().equals(dectypes.get(k++))) {
                                  			System.out.println("Params of " + $i.text + "at line " + $i.line + " do not correspond to declared");
                                  			System.exit(0);
@@ -595,8 +594,8 @@ value returns [Node ast]
   )?
   
    {
-    if ((entry.isMethod()) && !(isCall || isClassCall)) {
-    	//errore! ho scritto id senza parentesi o punto. id è un metodo, non una variabile ma ho voluto chiamarla come variabile
+    if (entry.isMethod() && !isCall) {
+    	//errore! ho scritto id senza parentesi. id è un metodo, non una variabile ma ho voluto chiamarla come variabile
     	System.out.println("Id  " + $i.text + " at line " + $i.line + " is not a variable");
     	System.exit(0);
     }
