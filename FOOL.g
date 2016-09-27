@@ -155,8 +155,8 @@ cllist returns [ArrayList < Node > astlist]
                                           parTypes.add($ptyf2.ast);
                                          })*)? RPAR 
                                                     {
-                                                     //aggiungo il tipo Arrow al metodo
-                                                     method.setArrowType(new ArrowTypeNode(parTypes, $fty.ast));
+                                                     //aggiungo il tipo Arrow al metodo (sbagliato)
+                                                    // method.setArrowType(new ArrowTypeNode(parTypes, $fty.ast));
                                                      
                                                      //una volta scritti tutti i parametri controllo se il metodo è già stato inserito
                                                      for (Node n : cn.getMethods()) {
@@ -169,7 +169,7 @@ cllist returns [ArrayList < Node > astlist]
                                                      //aggiungo il methodNode al class Node                                  
                                                      cn.addMethod(method);
                                                      //aggiungo il metodo alla CTentry (si aggiunge automaticamente anche alla symbol table visto che condividono la stessa virtual table)
-                                                     c.addMethod(method, nestingLevel - 1);//siccome sono già entrato nel nuovo scope e a me serve lo scope della classe devo usare il livello precedente
+                                                     c.addMethod(method, new ArrowTypeNode(parTypes, $fty.ast), nestingLevel - 1);//siccome sono già entrato nel nuovo scope e a me serve lo scope della classe devo usare il livello precedente
                                                     }
       (LET 
            {
@@ -575,7 +575,7 @@ value returns [Node ast]
                                  	System.out.println("Method " + $i2.text + "at line " + $i2.line + " is not declared for class " + $i.text);
                                  	System.exit(0);
                                  }
-                                 //controllo se i tipi di ingresso del metodo richiamato corrispondono con quelli del metodo dichiarato
+                                 //controllo se i tipi di ingresso del metodo richiamato corrispondono con quelli del metodo dichiarato (probabilmente fatto da TypeCheck, quindi va tolto da qui
                                  ArrayList<Node> dectypes = ((ArrowTypeNode) methodentry.getType()).getParList();
                                  if (dectypes.size() != arg.size()) {
                                  	System.out.println("Params of " + $i.text + " at line " + $i.line + " do not correspond to declared");
@@ -597,9 +597,10 @@ value returns [Node ast]
                                 }
   )?
   
-   {
-    if (entry.isMethod() && !isCall) {
+   {//questo controllo molto probabilmente va fatto in typecheck dentro IdNode
+    if ((entry.isMethod() && !isCall) || (entry.getType() == null && !isClassCall)) {
     	//errore! ho scritto id senza parentesi. id è un metodo, non una variabile ma ho voluto chiamarla come variabile
+    	//oppure è il nome di una classe e non ho usato la sintassi per la class call
     	System.out.println("Id  " + $i.text + " at line " + $i.line + " is not a variable");
     	System.exit(0);
     }

@@ -44,9 +44,9 @@ public class CTentry {
 	 * }
 	 */
 
-	public void addMethod(MethodNode method, int nl) {
+	public void addMethod(MethodNode method, ArrowTypeNode atn, int nl) {
 		allMethods.add(method);
-		STentry entry = new STentry(nl, method.getType(), offsetMethods++);
+		STentry entry = new STentry(nl, atn, offsetMethods++);
 		entry.setAsMethod(true);
 		vTable.put(method.getId(), entry);
 
