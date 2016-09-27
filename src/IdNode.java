@@ -15,7 +15,7 @@ public class IdNode implements Node {
 	}
 
 	public Node typeCheck() {
-		if (entry.getType() instanceof ArrowTypeNode) { //
+		if (entry.getType() instanceof ArrowTypeNode || entry.getType() == null ||  entry.isMethod()) { //
 			System.out.println("Wrong usage of function identifier");
 			System.exit(0);
 		}

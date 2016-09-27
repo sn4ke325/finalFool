@@ -481,8 +481,8 @@ value returns [Node ast]
   | i=ID 
          {
           // boolean isClassType = false;//flag che mi dice se la variabile punta ad un oggetto(classe) o altro (Int, bool)
-          boolean isCall = false; //flag che mi dice se ho scritto le parentesi della call 
-          boolean isClassCall = false;//flag che mi dice se ho scritto la sintassi della class call
+         // boolean isCall = false; //flag che mi dice se ho scritto le parentesi della call  //usato per il controllo su IdNode (risolto)
+         // boolean isClassCall = false;//flag che mi dice se ho scritto la sintassi della class call //usato per il controllo su IdNode (risolto)
           //caso 1
           //ID si riferisce ad una variabile richiamata nel corpo del programma
           //devo verificare se la variabile è stato dichiarata e quindi inserita nella symbol table
@@ -528,7 +528,7 @@ value returns [Node ast]
                                  	System.out.println("Id " + $i.text + " at line " + $i.line + " is not a declared method");
                                  	System.exit(0);
                                  }
-                                 isCall = true;
+                                // isCall = true; //usato per il controllo su IdNode (risolto)
                                  //controllo che la lista di parametri della chiamata corrisponda con la lista di parametri dichiarati nella classe
                                  ArrayList<Node> dectypes = ((ArrowTypeNode) entry.getType()).getParList();
                                  if (dectypes.size() != par.size()) {
@@ -590,20 +590,20 @@ value returns [Node ast]
                                  	}
                                  }
                                  
-                                 isClassCall = true;
+                                // isClassCall = true;//usato per il controllo su IdNode (risolto)
                                  
                                  $ast = new ClassCallNode($i.text, $i2.text, entry, methodentry, nestingLevel);
                                  //ID1 è una variabile che punta ad un oggetto di tipo classType
                                 }
   )?
   
-   {//questo controllo molto probabilmente va fatto in typecheck dentro IdNode
-    if ((entry.isMethod() && !isCall) || (entry.getType() == null && !isClassCall)) {
+   {//questo controllo molto probabilmente va fatto in typecheck dentro IdNode (aggiunto il controllo in IdNode)
+   /* if ((entry.isMethod() && !isCall) || (entry.getType() == null && !isClassCall)) {
     	//errore! ho scritto id senza parentesi. id è un metodo, non una variabile ma ho voluto chiamarla come variabile
     	//oppure è il nome di una classe e non ho usato la sintassi per la class call
     	System.out.println("Id  " + $i.text + " at line " + $i.line + " is not a variable");
     	System.exit(0);
-    }
+    }*/
    }
   ;
 /*------------------------------------------------------------------
