@@ -433,7 +433,6 @@ value returns [Node ast]
                    	System.out.println("Class type " + $i.text + " at line " + $i.line + " not declared");
                    	System.exit(0);
                    }
-                   $ast = new NewNode($i.text, clTable.get($i.text));
                    ArrayList<Node> par = new ArrayList<Node>();
                   }
   (e1=expr 
@@ -443,26 +442,10 @@ value returns [Node ast]
     (COMMA e2=expr 
                    {
                     par.add($e2.ast);
-                   })* 
-                       {
-                        $ast = new NewNode($i.text, par, clTable.get($i.text));
-                       })? RPAR 
-                                {
-                                 //controllo che i tipi corrispondano con quelli dichiarati (va fatto in typecheck)
-                                 ArrayList<Node> classFieldTypes = clTable.get($i.text).fieldTypeList();
-                                 if (classFieldTypes.size() != par.size()) {
-                                 	System.out.println("Params of " + $i.text + " at line " + $i.line + " do not correspond to declared");
-                                 	System.exit(0);
-                                 } else {
-                                 	int k = 0;
-                                 	for (Node node : par) {
-                                 		if (!node.typeCheck().equals(classFieldTypes.get(k++))) {
-                                 			System.out.println("Params of " + $i.text + "at line " + $i.line + " do not correspond to declared");
-                                 			System.exit(0);
-                                 		}
-                                 	}
-                                 }
-                                }
+                   })*)? RPAR 
+                              {
+                               $ast = new NewNode($i.text, par, clTable.get($i.text));
+                              }
   | LPAR e=expr RPAR 
                      {
                       $ast = $e.ast;
