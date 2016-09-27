@@ -127,7 +127,7 @@ cllist returns [ArrayList < Node > astlist]
                                  }
       LPAR 
            {
-            ArrayList<Node> parTypes = new ArrayList<Node>();//creo lista tipi di parametro per arrow se dovesse servire
+            ArrayList<Node> parTypes = new ArrayList<Node>();//creo lista tipi di parametro per arrow type
            }
       (pidf=ID COLON ptyf=type 
                                {

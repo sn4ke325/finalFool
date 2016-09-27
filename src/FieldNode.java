@@ -1,14 +1,18 @@
 
 public class FieldNode extends ParNode {
 
-	// private int offset;
+	private int offset;
 
-	public FieldNode(String i, Node t/*, int o*/) {
+	public FieldNode(String i, Node t) {
 		super(i, t);
-		//offset = o;
 	}
 
-	/*
-	 * public int getOffset() { return offset; }
-	 */
+	public void setOffset(int o) {
+		offset = o;
+	}
+
+	public int getOffset() {
+		return offset;
+	}
+
 }

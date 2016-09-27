@@ -24,31 +24,56 @@ public class CTentry {
 
 	}
 
-	/*
-	 * public Node addField(String id, Node ty, int nl) { FieldNode n = new
-	 * FieldNode(id, ty); allFields.add(n); vTable.put(id, new STentry(nl, ty,
-	 * offsetFields--)); return n; }
-	 */
-
 	public void addField(FieldNode field, int nl) {
-		allFields.add(field);
-		vTable.put(field.getId(), new STentry(nl, field.getType(), offsetFields--));
+		boolean overrides = false;
+		int index = 0;
+		int offset = offsetFields;
+		for (Node n : allFields) {
+			if (field.getId().equals(((FieldNode) n).getId())) {
+				overrides = true;
+				index = allFields.indexOf(n);
+				offset = ((FieldNode) n).getOffset();
+				break;
+			}
+		}
+		if (overrides) {
+			field.setOffset(offset);
+			allFields.set(index, field);
+			vTable.put(field.getId(), new STentry(nl, field.getType(), offset));
+		} else {
+			field.setOffset(offsetFields);
+			allFields.add(field);
+			vTable.put(field.getId(), new STentry(nl, field.getType(), offsetFields--));
+		}
+
 	}
 
-	/*
-	 * public Node addMethod(String id, Node ty, int nl) { MethodNode n = new
-	 * MethodNode(id, ty); allMethods.add(n); STentry entry = new STentry(nl,
-	 * ty, offsetMethods++); entry.setAsMethod(true); vTable.put(id, entry);
-	 * return n;
-	 * 
-	 * }
-	 */
-
 	public void addMethod(MethodNode method, ArrowTypeNode atn, int nl) {
-		allMethods.add(method);
-		STentry entry = new STentry(nl, atn, offsetMethods++);
-		entry.setAsMethod(true);
-		vTable.put(method.getId(), entry);
+		boolean overrides = false;
+		int index = 0;
+		int offset = offsetMethods;
+		for (Node n : allMethods) {
+			if (method.getId().equals(((MethodNode) n).getId())) {
+				overrides = true;
+				index = allMethods.indexOf(n);
+				offset = ((MethodNode) n).getOffset();
+				break;
+			}
+		}
+		if (overrides) {
+			method.setOffset(offset);
+			allMethods.add(method);
+			STentry entry = new STentry(nl, atn, offset);
+			entry.setAsMethod(true);
+			vTable.put(method.getId(), entry);
+
+		} else {
+			method.setOffset(offsetMethods);
+			allMethods.add(method);
+			STentry entry = new STentry(nl, atn, offsetMethods++);
+			entry.setAsMethod(true);
+			vTable.put(method.getId(), entry);
+		}
 
 	}
 
