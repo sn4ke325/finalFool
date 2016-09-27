@@ -12,7 +12,7 @@ public class ClassNode implements Node {
 		classEntry = cl;
 		superEntry = null;
 	}
-	
+
 	public ClassNode(String l, CTentry cl, CTentry su) {
 		id = l;
 		classEntry = cl;
@@ -30,12 +30,12 @@ public class ClassNode implements Node {
 	public String getId() {
 		return id;
 	}
-	
-	public ArrayList<Node> getFields(){
+
+	public ArrayList<Node> getFields() {
 		return fields;
 	}
-	
-	public ArrayList<Node> getMethods(){
+
+	public ArrayList<Node> getMethods() {
 		return methods;
 	}
 
@@ -47,7 +47,13 @@ public class ClassNode implements Node {
 
 	@Override
 	public Node typeCheck() {
-		// TODO Auto-generated method stub
+		for (Node n : methods) {
+			n.typeCheck();
+		}
+		if (superEntry != null) {
+			// devo controllare che overriding di campi e metodi sia corretto usando le due CTentry
+			
+		}
 		return null;
 	}
 

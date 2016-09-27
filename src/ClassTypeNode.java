@@ -6,26 +6,23 @@ public class ClassTypeNode implements Node {
 	public ClassTypeNode(String s) {
 		id = s;
 	}
-	
-	public String getId(){
+
+	public String getId() {
 		return id;
 	}
 
 	@Override
 	public String toPrint(String s) {
-		// TODO Auto-generated method stub
 		return s + id + " Type\n";
 	}
 
 	@Override
 	public Node typeCheck() {
-		
 		return null;
 	}
 
 	@Override
 	public String codeGeneration() {
-		
 		return "";
 	}
 
