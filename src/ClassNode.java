@@ -4,9 +4,19 @@ public class ClassNode implements Node {
 	private String id;
 	private ArrayList<Node> methods = new ArrayList<Node>();
 	private ArrayList<Node> fields = new ArrayList<Node>();
+	private CTentry classEntry;
+	private CTentry superEntry;
 
-	public ClassNode(String l) {
+	public ClassNode(String l, CTentry cl) {
 		id = l;
+		classEntry = cl;
+		superEntry = null;
+	}
+	
+	public ClassNode(String l, CTentry cl, CTentry su) {
+		id = l;
+		classEntry = cl;
+		superEntry = su;
 	}
 
 	public void addMethod(Node m) {

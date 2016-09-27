@@ -68,8 +68,7 @@ cllist returns [ArrayList < Node > astlist]
                   	System.exit(0);
                   }
                   //creo il class node per l'albero sintattico e lo aggiungo
-                  ClassNode cn = new ClassNode($cid.text);
-                  $astlist.add(cn);
+                  ClassNode cn = new ClassNode($cid.text, c);
                  }
     (EXTENDS eid=ID 
                     {
@@ -82,10 +81,13 @@ cllist returns [ArrayList < Node > astlist]
                      }
                      //estendo la classe copiando le informazioni contenunte in super class
                      c.extendsClass(cle);
+                     //siccome ho esteso creo un nuovo oggetto class node che include anche al ct entry della classe da cui estendo
+                     cn = new ClassNode($cid.text, c, cle);
                      //aggiungo una entry nella superType che associa la classe con la superclasse
                      superType.put($cid.text, $eid.text);
                     })? 
-                        {
+                        {//aggiungo class node al Syntax tree
+                         $astlist.add(cn);
                          //entro nello scope della classe e uso la virtual table come scope per la classe nella symbol table (anche se alla fine chiudo lo scope
                          //la virtual table sarà conservata intatta all'interno della CTentry)
                          nestingLevel++;
@@ -316,7 +318,7 @@ basic returns [Node ast]
          }
   ;
 
-arrow returns [Node ast] 
+arrow returns [Node ast]
   :
   LPAR 
        {
@@ -444,7 +446,8 @@ value returns [Node ast]
                        {
                         $ast = new NewNode($i.text, par, clTable.get($i.text));
                        })? RPAR 
-                                {//controllo che i tipi corrispondano con quelli dichiarati
+                                {
+                                 //controllo che i tipi corrispondano con quelli dichiarati
                                  ArrayList<Node> classFieldTypes = clTable.get($i.text).fieldTypeList();
                                  if (classFieldTypes.size() != par.size()) {
                                  	System.out.println("Params of " + $i.text + " at line " + $i.line + " do not correspond to declared");
@@ -544,7 +547,8 @@ value returns [Node ast]
                                  $ast = new CallNode($i.text, entry, par, nestingLevel);
                                 }
     | DOT i2=ID LPAR 
-                     {//Caso 3: Class call ID1 è la variabile che punta ad un un oggetto di tipo classe. ID2 è un metodo per quella classe
+                     {
+                      //Caso 3: Class call ID1 è la variabile che punta ad un un oggetto di tipo classe. ID2 è un metodo per quella classe
                       ArrayList<Node> arg = new ArrayList<Node>();
                      }
     (e1=expr 
@@ -562,7 +566,7 @@ value returns [Node ast]
                                  	System.exit(0);
                                  }
                                  //controllo se il metodo è stato dichiarato all'interno della classe richiamata prima del punto e mi salvo la sua STentry
-                                // String classTypeName=((ClassTypeNode) entry.getType()).getId();//recupero il nome del tipo della classe 
+                                 // String classTypeName=((ClassTypeNode) entry.getType()).getId();//recupero il nome del tipo della classe 
                                  HashMap<String, STentry> vtable = clTable.get(((ClassTypeNode) entry.getType()).getId()).getVTable();
                                  STentry methodentry = null;
                                  if (vtable.containsKey($i2.text)) {
@@ -572,7 +576,7 @@ value returns [Node ast]
                                  	System.exit(0);
                                  }
                                  //controllo se i tipi di ingresso del metodo richiamato corrispondono con quelli del metodo dichiarato
-                                 ArrayList<Node> dectypes =((ArrowTypeNode) methodentry.getType()).getParList();
+                                 ArrayList<Node> dectypes = ((ArrowTypeNode) methodentry.getType()).getParList();
                                  if (dectypes.size() != arg.size()) {
                                  	System.out.println("Params of " + $i.text + " at line " + $i.line + " do not correspond to declared");
                                  	System.exit(0);
