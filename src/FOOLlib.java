@@ -14,15 +14,14 @@ public class FOOLlib {
 		superType = hm;
 	}
 
-	// controllare isSubtype()
-	public static boolean isSubtype(ClassNode a, ClassNode b) {
-
-		return b.getId().equals(superType.get(a.getId()));
-	}
-
 	// valuta se il tipo "a" � <= al tipo "b", dove "a" e "b" sono tipi di
 	// base: int o bool
 	public static boolean isSubtype(Node a, Node b) {
+		if (a instanceof ClassTypeNode && b instanceof ClassTypeNode) {
+			String ida = ((ClassTypeNode) a).getId();
+			String idb = ((ClassTypeNode) b).getId();
+			return (ida.equals(idb)) || superType.get(ida).equals(idb);
+		}
 		return a.getClass().equals(b.getClass()) || ((a instanceof BoolTypeNode) && (b instanceof IntTypeNode)); //
 	}
 
