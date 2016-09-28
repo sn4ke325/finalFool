@@ -80,8 +80,8 @@ public class ClassNode implements Node {
 				}
 				for (int j = 0; j < splist.size(); j++) {
 					if (!FOOLlib.isSubtype(cplist.get(j), splist.get(j))) {
-						System.out.println(
-								"Wrong parameter type for the " + (i + 1) + "-th method. Incorrect inheritance of method");
+						System.out.println("Wrong parameter type for the " + (i + 1)
+								+ "-th method. Incorrect inheritance of method");
 						System.exit(0);
 					}
 				}
@@ -92,8 +92,11 @@ public class ClassNode implements Node {
 
 	@Override
 	public String codeGeneration() {
-		// TODO Auto-generated method stub
-		return null;
+		for (Node n : methods) {
+			((MethodNode) n).setLabel(FOOLlib.freshLabel());
+			n.codeGeneration();
+		}
+		return "";
 	}
 
 }
