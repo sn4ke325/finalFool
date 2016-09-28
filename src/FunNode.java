@@ -33,6 +33,10 @@ public class FunNode implements Node {
 		return type;
 	}
 
+	public ArrayList<Node> getParList() {
+		return parlist;
+	}
+
 	public void setArrowType(ArrowTypeNode n) {
 		type = n;
 	}
