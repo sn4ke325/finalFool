@@ -17,6 +17,8 @@ public class FOOLlib {
 	// valuta se il tipo "a" � <= al tipo "b", dove "a" e "b" sono tipi di
 	// base: int o bool
 	public static boolean isSubtype(Node a, Node b) {
+		if (a instanceof EmptyTypeNode && b instanceof ClassTypeNode)
+			return true;
 		if (a instanceof ClassTypeNode && b instanceof ClassTypeNode) {
 			String ida = ((ClassTypeNode) a).getId();
 			String idb = ((ClassTypeNode) b).getId();
