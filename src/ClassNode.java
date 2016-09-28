@@ -75,13 +75,13 @@ public class ClassNode implements Node {
 				ArrayList<Node> splist = ((MethodNode) superEntry.getAllMethods().get(i)).getParList();
 				if (cplist.size() != splist.size()) {
 					System.out.println("Wrong number of parameters for the " + (i + 1)
-							+ "-th method. Wrong inheritance of method");
+							+ "-th method. Incorrect inheritance of method");
 					System.exit(0);
 				}
 				for (int j = 0; j < splist.size(); j++) {
 					if (!FOOLlib.isSubtype(cplist.get(j), splist.get(j))) {
 						System.out.println(
-								"Wrong parameter type for the " + (i + 1) + "-th method. Wrong inheritance of method");
+								"Wrong parameter type for the " + (i + 1) + "-th method. Incorrect inheritance of method");
 						System.exit(0);
 					}
 				}
