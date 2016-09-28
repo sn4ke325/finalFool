@@ -15,13 +15,19 @@ public class MethodNode extends FunNode {
 	public int getOffset() {
 		return offset;
 	}
-	
-	public void setLabel(String l){
+
+	public void setLabel(String l) {
 		label = l;
 	}
-	
-	public String getLabel(){
+
+	public String getLabel() {
 		return label;
+	}
+
+	public String codeGeneration() {
+		
+		FOOLlib.putCode(label + ":\n" + "codice del metodo");
+		return "";
 	}
 
 }
