@@ -1,4 +1,4 @@
-public class VarNode implements Node {
+public class VarNode implements DecNode {
 
 	private String id;
 	private Node type;
@@ -25,6 +25,11 @@ public class VarNode implements Node {
 
 	public String codeGeneration() {
 		return exp.codeGeneration();
+	}
+
+	@Override
+	public Node getSymType() {
+		return type;
 	}
 
 }

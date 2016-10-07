@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 
-public class FunNode implements Node {
+public class FunNode implements DecNode {
 
 	protected String id;
 	protected Node type;
 	protected ArrayList<Node> parlist = new ArrayList<Node>();
 	protected ArrayList<Node> declist = new ArrayList<Node>();
 	protected Node body;
+	protected Node symType;
 
 	public FunNode(String i, Node t) {
 		id = i;
@@ -38,7 +39,7 @@ public class FunNode implements Node {
 	}
 
 	public void setArrowType(ArrowTypeNode n) {
-		type = n;
+		symType = n;
 	}
 
 	public String toPrint(String s) {
@@ -69,6 +70,11 @@ public class FunNode implements Node {
 			System.exit(0);
 		}
 		return null;
+	}
+
+	@Override
+	public Node getSymType() {
+		return symType;
 	}
 
 }

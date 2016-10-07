@@ -1,4 +1,4 @@
-public class ParNode implements Node {
+public class ParNode implements DecNode {
 
 	protected String id;
 	protected Node type;
@@ -27,6 +27,11 @@ public class ParNode implements Node {
 
 	public String codeGeneration() {
 		return "";
+	}
+
+	@Override
+	public Node getSymType() {
+		return type;
 	}
 
 }
