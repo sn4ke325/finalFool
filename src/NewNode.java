@@ -13,9 +13,11 @@ public class NewNode implements Node {
 	}
 
 	@Override
-	public String toPrint(String indent) {
-		// TODO Auto-generated method stub
-		return null;
+	public String toPrint(String s) {
+		String parl = "";
+		for (Node n : param)
+			parl += n.toPrint(s + "  ");
+		return s + "New " + id + "\n" + parl;
 	}
 
 	@Override
@@ -26,7 +28,7 @@ public class NewNode implements Node {
 			System.exit(0);
 		}
 		for (int i = 0; i < param.size(); i++)
-			if (!(FOOLlib.isSubtype((param.get(i)).typeCheck(), f.get(i)))) {
+			if (!(FOOLlib.isSubtype((param.get(i)).typeCheck(), ((FieldNode) f.get(i)).getType()))) {
 				System.out.println("Wrong type for " + (i + 1) + "-th parameter in the invocation of " + id);
 				System.exit(0);
 			}

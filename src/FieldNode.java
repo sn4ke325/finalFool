@@ -15,4 +15,8 @@ public class FieldNode extends ParNode {
 		return offset;
 	}
 
+	public String toPrint(String s) {
+		return s + "Field: " + id + type.toPrint(" ");
+	}
+
 }

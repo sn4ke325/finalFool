@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class FunNode implements Node {
 
-	private String id;
-	private Node type;
-	private ArrayList<Node> parlist = new ArrayList<Node>();
-	private ArrayList<Node> declist = new ArrayList<Node>();
-	private Node body;
+	protected String id;
+	protected Node type;
+	protected ArrayList<Node> parlist = new ArrayList<Node>();
+	protected ArrayList<Node> declist = new ArrayList<Node>();
+	protected Node body;
 
 	public FunNode(String i, Node t) {
 		id = i;

@@ -40,9 +40,14 @@ public class ClassNode implements Node {
 	}
 
 	@Override
-	public String toPrint(String indent) {
-		// TODO Auto-generated method stub
-		return null;
+	public String toPrint(String s) {
+		String fieldlst = "";
+		for (Node n : fields)
+			fieldlst += n.toPrint(s + "  ");
+		String methodlst = "";
+		for (Node n : methods)
+			methodlst += n.toPrint(s + "  ");
+		return s + "Class: " + id + "\n" + fieldlst + methodlst;
 	}
 
 	@Override

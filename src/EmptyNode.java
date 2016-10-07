@@ -7,7 +7,7 @@ public class EmptyNode implements Node {
 
 	public String toPrint(String s) {
 
-		return s + "null\n";
+		return s + "Null\n";
 	}
 
 	public Node typeCheck() {

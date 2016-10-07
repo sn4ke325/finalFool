@@ -20,16 +20,21 @@ public class ClassCallNode implements Node {
 
 	@Override
 	public String toPrint(String s) {
-		// TODO Auto-generated method stub
-		return null;
+		String parl = "";
+		for(Node n: parlist)
+			parl+=n.toPrint(s + "  ");
+
+		return s + "Class Call: " + id1 + " to method "+ id2 + " at nestlev " + nl +"\n" + entry.toPrint(s + "  ") + methodEntry.toPrint(s + "  ") + parl;
 	}
 
 	@Override
 	public Node typeCheck() {
 		ArrowTypeNode t = null;
-		if (methodEntry.getType() instanceof ArrowTypeNode)
-			t = (ArrowTypeNode) entry.getType();
-		else {
+
+		if (methodEntry.getType() instanceof ArrowTypeNode) {
+			// System.out.println("ho fatto instance of di ArrowTypeNode");
+			t = (ArrowTypeNode) methodEntry.getType();
+		} else {
 			System.out.println("Invocation of a non-function " + id2);
 			System.exit(0);
 		}

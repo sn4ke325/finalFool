@@ -21,7 +21,7 @@ public class GRNode implements Node {
 			System.out.println("Non integers in >=");
 			System.exit(0);
 		}
-		return new IntTypeNode();
+		return new BoolTypeNode();
 	}
 
 	public String codeGeneration() {

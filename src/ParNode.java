@@ -1,7 +1,7 @@
 public class ParNode implements Node {
 
-	private String id;
-	private Node type;
+	protected String id;
+	protected Node type;
 
 	public ParNode(String i, Node t) {
 		id = i;

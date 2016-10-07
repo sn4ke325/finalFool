@@ -42,7 +42,7 @@ public class STentry {
 
 	public String toPrint(String s) { //
 		return s + "STentry: nestlev " + Integer.toString(nl) + "\n" + s + "STentry: offset " + Integer.toString(offset)
-				+ "\n" + s + "STentry: type\n" + type.toPrint(s + "  ");
+				+ "\n" + s + "STentry: type " + type.toPrint(" ");
 	}
 
 }

@@ -11,7 +11,8 @@ public class IfNode implements Node {
 	}
 
 	public String toPrint(String s) {
-		return s + "If\n" + cond.toPrint(s + "  ") + th.toPrint(s + "  ") + el.toPrint(s + "  ");
+		return s + "If\n" + cond.toPrint(s + "  ") + s + "then\n" + th.toPrint(s + "  ") + s + "else\n"
+				+ el.toPrint(s + "  ");
 	}
 
 	public Node typeCheck() {
