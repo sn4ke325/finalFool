@@ -17,6 +17,19 @@ public class FOOLlib {
 	// valuta se il tipo "a" � <= al tipo "b", dove "a" e "b" sono tipi di
 	// base: int o bool
 	public static boolean isSubtype(Node a, Node b) {
+		if (a instanceof ArrowTypeNode && b instanceof ArrowTypeNode) {
+			boolean isSub = false;
+			if (isSubtype(((ArrowTypeNode) a).getRet(), ((ArrowTypeNode) b).getRet())) {
+				if (((ArrowTypeNode) a).getParList().size() == ((ArrowTypeNode) b).getParList().size()) {
+					for (int i = 0; i < ((ArrowTypeNode) a).getParList().size(); i++)
+						if (!isSubtype(((ArrowTypeNode) b).getParList().get(i),
+								((ArrowTypeNode) b).getParList().get(i)))
+							return false;
+				}
+				isSub = true;
+			}
+			return isSub;
+		}
 		if (a instanceof EmptyTypeNode && b instanceof ClassTypeNode)
 			return true;
 		if (a instanceof ClassTypeNode && b instanceof ClassTypeNode) {
