@@ -15,7 +15,7 @@ public class IdNode implements Node {
 	}
 
 	public Node typeCheck() {
-		if (entry.getType() instanceof ArrowTypeNode || entry.getType() == null ||  entry.isMethod()) { //
+		if (entry.getType() == null || entry.isMethod()) { //
 			System.out.println("Wrong usage of function identifier");
 			System.exit(0);
 		}
@@ -23,10 +23,18 @@ public class IdNode implements Node {
 	}
 
 	public String codeGeneration() {
+		//work in progress
 		String getAR = "";
 		for (int i = 0; i < nl - entry.getNestinglevel(); i++)
 			getAR += "lw\n";
-		return "push " + entry.getOffset() + "\n" + "lfp\n" + getAR + "add\n" + "lw\n";
+		
+		String code="push " + entry.getOffset() + "\n" + "lfp\n" + getAR + "add\n" + "lw\n";
+		
+		if(entry.getType() instanceof ArrowTypeNode)
+			code+= "push " + (entry.getOffset()-1)+ "\n"+"lfp\n" +getAR+ "add\n" + ""
+			
+		
+		return code;
 	}
 
 }

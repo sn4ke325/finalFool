@@ -55,10 +55,28 @@ public class FunNode implements DecNode {
 	public String codeGeneration() {
 
 		String funl = FOOLlib.freshFunLabel();
+		String popParSequence = "";
+		for (Node n : parlist) {
+			popParSequence += "pop\n";
+			if (((DecNode) n).getSymType() instanceof ArrowTypeNode)
+				popParSequence += "pop\n";
+		}
 
-		FOOLlib.putCode(funl + ":\n" + "codice della funzione");
+		String popDecSequence = "";
+		for (Node n : declist) {
+			popDecSequence += "pop\n";
+			if (((DecNode)n).getSymType() instanceof ArrowTypeNode)
+				popDecSequence += "pop\n";
+		}
 
-		return "push " + funl + "\n";
+		String declCode = "";
+		for (Node n : declist)
+			declCode += n.codeGeneration();
+
+		FOOLlib.putCode(funl + ":\n" + "cfp\n" + "lra\n" + declCode + body.codeGeneration() + "srv\n" + popDecSequence
+				+ "sra\n" + "sfp\n" + popParSequence + "pop\n" + "lrv\n" + "lra\n" + "js\n");
+
+		return "lfp\n" + "push " + funl + "\n";
 	}
 
 	// valore di ritorno non utilizzato
