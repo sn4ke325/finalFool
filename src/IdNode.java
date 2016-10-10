@@ -23,17 +23,16 @@ public class IdNode implements Node {
 	}
 
 	public String codeGeneration() {
-		//work in progress
 		String getAR = "";
 		for (int i = 0; i < nl - entry.getNestinglevel(); i++)
 			getAR += "lw\n";
-		
-		String code="push " + entry.getOffset() + "\n" + "lfp\n" + getAR + "add\n" + "lw\n";
-		
-		if(entry.getType() instanceof ArrowTypeNode)
-			code+= "push " + (entry.getOffset()-1)+ "\n"+"lfp\n" +getAR+ "add\n" + ""
-			
-		
+
+		String code = "push " + entry.getOffset() + "\n" + "lfp\n" + getAR + "add\n" + "lw\n";
+
+		if (entry.getType() instanceof ArrowTypeNode)
+			//offset -1 perchè FP punta sopra l'indirizzo della funzione
+			code += "push " + (entry.getOffset() - 1) + "\n" + "lfp\n" + getAR + "add\n" + "lw\n";
+
 		return code;
 	}
 

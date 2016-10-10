@@ -37,8 +37,23 @@ public class NewNode implements Node {
 
 	@Override
 	public String codeGeneration() {
-		// TODO Auto-generated method stub
-		return null;
+
+		if (param.isEmpty() && entry.getAllMethods().isEmpty()) {
+			return "lhp\n" + "lhp\n" + "push 1 \n" + "add\n" + "shp\n";
+		}
+		// metto i parametri sullo stack
+		String code = "";
+		for (Node n : param) {
+			code += n.codeGeneration();
+		}
+		for (Node n : param)
+			code += "lhp\n" + "sw\n" + "lhp\n" + "push 1\n" + "add\n" + "shp\n";
+		code += "lhp\n";
+		for (Node n : entry.getAllMethods()) {
+			code += "push " + ((MethodNode) n).getLabel() + "\n" + "lhp\n" + "sw\n" + "lhp\n" + "push 1 \n" + "add\n"
+					+ "shp\n";
+		}
+		return code;
 	}
 
 }

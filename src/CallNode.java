@@ -43,8 +43,16 @@ public class CallNode implements Node {
 	}
 
 	public String codeGeneration() {
-		
-		return "";
+		String getAR = "";
+		for (int i = 0; i < nl - entry.getNestinglevel(); i++)
+			getAR += "lw\n";
+		if (entry.isMethod()) {
+			return "push " + entry.getOffset() + "\n" + "lfp\n" + getAR + "add\n" + "lw\n";
+		} else {
+			return "push " + entry.getOffset() + "\n" + "lfp\n" + getAR + "add\n" + "lw\n" + "push "
+					+ (entry.getOffset() - 1) + "\n" + "lfp\n" + getAR + "add\n" + "lw\n";
+		}
+
 	}
 
 }

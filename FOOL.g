@@ -506,10 +506,10 @@ value returns [Node ast]
                      })*)? RPAR 
                                 {
                                  //controllo se ID è un metodo dichiarato nello scope della classe
-                                 if (!entry.isMethod()) {
+                                /* if (!entry.isMethod()) {
                                  	System.out.println("Id " + $i.text + " at line " + $i.line + " is not a declare method for this scope");
                                  	System.exit(0);
-                                 }
+                                 }*/
                                  $ast = new CallNode($i.text, entry, par, nestingLevel);
                                 }
     | DOT i2=ID LPAR 

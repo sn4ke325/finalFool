@@ -54,8 +54,11 @@ public class ClassCallNode implements Node {
 
 	@Override
 	public String codeGeneration() {
-		// TODO Auto-generated method stub
-		return null;
+		String getAR = "";
+		for (int i = 0; i < nl - entry.getNestinglevel(); i++)
+			getAR += "lw\n";
+		// risalgo al frame pointer  della dichiarazione dell'oggetto e aggiungo offset metodo per puntarlo
+		return "push " + entry.getOffset() + "\n" + "lfp\n" + getAR + "add\n" + "lw\n" + "push " + methodEntry.getOffset() + "\n" + "add\n" + "lw\n";
 	}
 
 }

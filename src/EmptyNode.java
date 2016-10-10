@@ -16,7 +16,7 @@ public class EmptyNode implements Node {
 
 	public String codeGeneration() {
 
-		return "push null\n";
+		return "push -1\n";
 	}
 
 }

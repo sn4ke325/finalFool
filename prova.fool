@@ -1,10 +1,10 @@
-let 
+/*let 
   var x:int = 2;
   var b:bool = true;
 in
   print (if (b) then { x+1 } else { x+2 });
   
-/* SERBATOIO ESEMPI
+ SERBATOIO ESEMPI
 let 
   var x:int = 2;
   var b:bool = true;
@@ -15,9 +15,9 @@ let
   fun f:int (i:int, j:int) i+j;
 in
   print (f(3,5));
-----------------
+----------------*/
 let
-  var y:int = 5+2;
+  var y:int =5+3;
   fun f:bool (n:int, m:int)
     let 
       var x:int = m;
@@ -28,4 +28,3 @@ in
       then { false }
       else { 10 }
   ); 
-*/

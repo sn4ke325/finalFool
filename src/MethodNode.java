@@ -31,12 +31,32 @@ public class MethodNode extends FunNode {
 		String declstr = "";
 		for (Node dec : declist)
 			declstr += dec.toPrint(s + "  ");
-		return s + "Method:" + id  + type.toPrint(" ") + parlstr + declstr + body.toPrint(s + "  ");
+		return s + "Method:" + id + type.toPrint(" ") + parlstr + declstr + body.toPrint(s + "  ");
 	}
 
 	public String codeGeneration() {
 
-		FOOLlib.putCode(label + ":\n" + "codice del metodo");
+		String methl = FOOLlib.freshFunLabel();
+		String popParSequence = "";
+		for (Node n : parlist) {
+			popParSequence += "pop\n";
+			if (((DecNode) n).getSymType() instanceof ArrowTypeNode)
+				popParSequence += "pop\n";
+		}
+
+		String popDecSequence = "";
+		for (Node n : declist) {
+			popDecSequence += "pop\n";
+			if (((DecNode) n).getSymType() instanceof ArrowTypeNode)
+				popDecSequence += "pop\n";
+		}
+
+		String declCode = "";
+		for (Node n : declist)
+			declCode += n.codeGeneration();
+
+		FOOLlib.putCode(methl + ":\n" + "cfp\n" + "lra\n" + declCode + body.codeGeneration() + "srv\n" + popDecSequence
+				+ "sra\n" + "sfp\n" + popParSequence + "pop\n" + "lrv\n" + "lra\n" + "js\n");
 		return "";
 	}
 
