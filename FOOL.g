@@ -22,7 +22,7 @@ private int offset = -2;
 /*------------------------------------------------------------------
  * PARSER RULES
  *------------------------------------------------------------------*/
-//modificare ClassNode perchè riceva ST entry e nesting level nel costruttore
+
 
 
 prog returns [Node ast]
