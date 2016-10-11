@@ -21,10 +21,11 @@ public class ClassCallNode implements Node {
 	@Override
 	public String toPrint(String s) {
 		String parl = "";
-		for(Node n: parlist)
-			parl+=n.toPrint(s + "  ");
+		for (Node n : parlist)
+			parl += n.toPrint(s + "  ");
 
-		return s + "Class Call: " + id1 + " to method "+ id2 + " at nestlev " + nl +"\n" + entry.toPrint(s + "  ") + methodEntry.toPrint(s + "  ") + parl;
+		return s + "Class Call: " + id1 + " to method " + id2 + " at nestlev " + nl + "\n" + entry.toPrint(s + "  ")
+				+ methodEntry.toPrint(s + "  ") + parl;
 	}
 
 	@Override
@@ -57,8 +58,10 @@ public class ClassCallNode implements Node {
 		String getAR = "";
 		for (int i = 0; i < nl - entry.getNestinglevel(); i++)
 			getAR += "lw\n";
-		// risalgo al frame pointer  della dichiarazione dell'oggetto e aggiungo offset metodo per puntarlo
-		return "push " + entry.getOffset() + "\n" + "lfp\n" + getAR + "add\n" + "lw\n" + "push " + methodEntry.getOffset() + "\n" + "add\n" + "lw\n";
+		// risalgo al frame pointer della dichiarazione dell'oggetto e metto indirizzo object pointer in AL e in offset -1 sullo stack metto l'indirizzo del metodo
+		return "push " + entry.getOffset() + "\n" + "lfp\n" + getAR + "add\n" + "lfp\n" + "push 1\n" + "add\n" + "sw\n"
+				+ "push " + entry.getOffset() + "\n" + "lfp\n" + getAR + "add\n" + "lw\n" + "push "
+				+ methodEntry.getOffset() + "\n" + "add\n";
 	}
 
 }

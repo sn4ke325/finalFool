@@ -50,7 +50,7 @@ public class CallNode implements Node {
 			return "push " + entry.getOffset() + "\n" + "lfp\n" + getAR + "add\n" + "lw\n";
 		} else {
 			return "push " + entry.getOffset() + "\n" + "lfp\n" + getAR + "add\n" + "lw\n" + "push "
-					+ (entry.getOffset() - 1) + "\n" + "lfp\n" + getAR + "add\n" + "lw\n";
+					+ entry.getOffset() + "\n" + "lfp\n" + getAR + "add\n";
 		}
 
 	}
