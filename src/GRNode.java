@@ -26,13 +26,19 @@ public class GRNode implements Node {
 
 	public String codeGeneration() {
 		String labelTrue = FOOLlib.freshLabel();
-		String labelTrue2 = FOOLlib.freshLabel();
+		//String labelTrue2 = FOOLlib.freshLabel();
 		String labelEnd = FOOLlib.freshLabel();
 
-		return left.codeGeneration() + right.codeGeneration() + "bless " + labelTrue2 + "\n" + // se left<=right salto in labelTrue2
-				"b " + labelTrue + "\n" + // altrimenti salto a labelTrue
-				labelTrue2 + ":\n" + left.codeGeneration() + right.codeGeneration() + "beq " + labelTrue + "\n"
-				+ "push 0\n" + "b " + labelEnd + "\n" + labelTrue + ":\n" + "push 1\n" + labelEnd + ":\n";
+		/*
+		 * return left.codeGeneration() + right.codeGeneration() + "bless " +
+		 * labelTrue2 + "\n" + // se left<=right salto in labelTrue2 "b " +
+		 * labelTrue + "\n" + // altrimenti salto a labelTrue labelTrue2 + ":\n"
+		 * + left.codeGeneration() + right.codeGeneration() + "beq " + labelTrue
+		 * + "\n" + "push 0\n" + "b " + labelEnd + "\n" + labelTrue + ":\n" +
+		 * "push 1\n" + labelEnd + ":\n";
+		 */
+		return right.codeGeneration() + left.codeGeneration() + "bless " + labelTrue + "\n" + "push 0\n" + "b "
+				+ labelEnd + "\n" + labelTrue + ":\n" + "push 1\n" + labelEnd + ":\n";
 
 	}
 
