@@ -1,5 +1,7 @@
 push 0
+lfp
 push function0
+lfp
 push function1
 push -2
 lfp

@@ -4,9 +4,10 @@ public class IdNode implements Node {
 	private STentry entry;
 	private int nl;
 
+
 	public IdNode(String i, STentry st, int n) {
 		id = i;
-		entry = st;
+		entry = st; //entry della dichiarazione
 		nl = n;
 	}
 
@@ -23,12 +24,13 @@ public class IdNode implements Node {
 	}
 
 	public String codeGeneration() {
+		String code="";
+			
 		String getAR = "";
-		for (int i = 0; i < nl - entry.getNestinglevel(); i++)
+		for (int i = 0; i < nl - entry.getNestinglevel() ; i++)
 			getAR += "lw\n";
 
-		String code = "push " + entry.getOffset() + "\n" + "lfp\n" + getAR + "add\n" + "lw\n";
-
+		code = "push " + entry.getOffset() + "\n" + "lfp\n" + getAR + "add\n" + "lw\n";
 		if (entry.getType() instanceof ArrowTypeNode)
 			code += "push " + entry.getOffset() + "\n" + "lfp\n" + getAR + "add\n";
 
