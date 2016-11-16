@@ -20,7 +20,7 @@ public class Test {
 
 		Node type = ast.typeCheck(); // type-checking bottom-up
 		System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
-
+///*
 		String code = ast.codeGeneration();
 
 		BufferedWriter out = new BufferedWriter(new FileWriter(fileName + ".asm"));
@@ -37,6 +37,6 @@ public class Test {
 
 		ExecuteVM vm = new ExecuteVM(parserVM.code);
 		vm.cpu();
-
+//*/
 	}
 }

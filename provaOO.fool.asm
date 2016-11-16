@@ -49,7 +49,7 @@ lhp
 push 1 
 add
 shp
-push label9
+push label8
 lhp
 sw
 lhp
@@ -103,14 +103,14 @@ lfp
 add
 lw
 push -1
-beq label17
-push 0
-b label18
-label17:
-push 1
-label18:
-push 1
 beq label15
+push 0
+b label16
+label15:
+push 1
+label16:
+push 1
+beq label13
 push -4
 lfp
 add
@@ -124,10 +124,10 @@ add
 lw
 push 0
 add
-b label16
-label15:
+b label14
+label13:
 push 0
-label16:
+label14:
 print
 halt
 
@@ -182,37 +182,7 @@ js
 function3:
 cfp
 lra
-push 1
-lfp
-add
-lfp
-push 1
-add
-sw
-push 1
-lfp
-add
-lw
-push 0
-add
-push 1
-lfp
-add
-lfp
-push 1
-add
-sw
-push 1
-lfp
-add
-lw
-push 1
-add
-add
 push 30000
-bless label7
-b label6
-label7:
 push 1
 lfp
 add
@@ -240,13 +210,12 @@ lw
 push 1
 add
 add
-push 30000
-beq label6
+bless label6
 push 0
-b label8
+b label7
 label6:
 push 1
-label8:
+label7:
 push 1
 beq label4
 push -1
@@ -294,6 +263,7 @@ js
 function4:
 cfp
 lra
+push 20000
 push 1
 lfp
 add
@@ -307,35 +277,17 @@ add
 lw
 push 0
 add
-push 20000
-bless label13
+bless label11
+push 0
 b label12
-label13:
+label11:
 push 1
-lfp
-add
-lfp
-push 1
-add
-sw
-push 1
-lfp
-add
-lw
-push 0
-add
-push 20000
-beq label12
-push 0
-b label14
 label12:
 push 1
-label14:
-push 1
-beq label10
+beq label9
 push -1
-b label11
-label10:
+b label10
+label9:
 push -2
 lfp
 lw
@@ -393,7 +345,7 @@ lhp
 push 1 
 add
 shp
-label11:
+label10:
 srv
 sra
 sfp
