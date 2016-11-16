@@ -1,7 +1,7 @@
 
 /*print(4<=8); //prints true*/
 /*print(4<=4); //prints true*/
-/*print(4<=2); //prints false*/
+print(4<=2); /*prints false*/
 /*print(10>=5); // prints true*/
 /*print(5>=5); //prints true*/
 /*print(3>=5); //prints false*/
