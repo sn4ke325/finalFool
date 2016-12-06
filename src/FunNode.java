@@ -74,9 +74,9 @@ public class FunNode implements DecNode {
 			declCode += n.codeGeneration();
 
 		FOOLlib.putCode(funl + ":\n" + "cfp\n" + "lra\n" + declCode + body.codeGeneration() + "srv\n" + popDecSequence
-				+ "sra\n" + "sfp\n" + popParSequence + "pop\n" + "lrv\n" + "lra\n" + "js\n");
+				+ "sra\n" + "pop\n"  + popParSequence + "sfp\n" + "lrv\n" + "lra\n" + "js\n");
 
-		return "lfp\n" + "push " + funl + "\n";
+		return "push " + funl + "\n";
 	}
 
 	// valore di ritorno non utilizzato

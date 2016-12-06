@@ -1,7 +1,8 @@
 /*test per funzioni high-order, devo verificare se le funzioni possono essere passate come parametri in altre funzioni*/
 let
-fun f: int(a:int, b:int) a+b;
-fun g: int(a:int, b:int) a-b;
+var x:int = 5;
+fun f:int (a:int, b:int) a+b;
+fun g:int (a:int, b:int) a-b;
 in
-print(f(5,5));
+print(x+x);
 /*print(f(5, g(10,3)));*/

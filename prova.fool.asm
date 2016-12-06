@@ -2,16 +2,14 @@ push 0
 push 5
 push 3
 add
-lfp
 push function0
 push -3
 lfp
 add
 lw
-push -2
+push -3
 lfp
 add
-lw
 push 1
 beq label2
 push 10
@@ -47,10 +45,10 @@ label1:
 srv
 pop
 sra
+pop
+pop
+pop
 sfp
-pop
-pop
-pop
 lrv
 lra
 js

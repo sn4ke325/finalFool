@@ -1,7 +1,6 @@
 push 0
-lfp
+push 5
 push function0
-lfp
 push function1
 push -2
 lfp
@@ -9,6 +8,8 @@ add
 lw
 push -2
 lfp
+add
+lw
 add
 print
 halt
@@ -27,10 +28,10 @@ lw
 add
 srv
 sra
+pop
+pop
+pop
 sfp
-pop
-pop
-pop
 lrv
 lra
 js
@@ -49,10 +50,10 @@ lw
 sub
 srv
 sra
+pop
+pop
+pop
 sfp
-pop
-pop
-pop
 lrv
 lra
 js
